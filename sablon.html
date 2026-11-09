@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>$title$</title>
+$if(aciklama)$<meta name="description" content="$aciklama$">$endif$
+<meta name="robots" content="index, follow">
+<!-- Yollar GÖRELİ: site hem özel alan adının kökünde hem de GitHub Pages'in
+     /uygulamalar/ alt yolunda aynı şekilde çalışsın diye. Mutlak yol
+     yazılsaydı ikisinden biri kırılırdı. -->
+<link rel="stylesheet" href="$kok$assets/style.css">
+</head>
+<body>
+<div class="sayfa">
+
+$if(ustlink)$<header class="ust">
+  <a href="$kok$">← Tüm uygulamalar</a>
+</header>$endif$
+
+<h1>$title$</h1>
+
+$body$
+
+<footer class="alt">
+  <p>$if(yayinci)$$yayinci$ · $endif$<a href="$kok$">tüm uygulamalar</a></p>
+</footer>
+
+</div>
+</body>
+</html>

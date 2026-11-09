@@ -1,0 +1,178 @@
+/* Uygulama yasal ve destek sayfaları.
+ *
+ * Tek bir CSS, JavaScript yok. Sebebi mağaza incelemesi: gizlilik adresi
+ * App Store'da zorunlu ve inceleyen kişi onu çoğu zaman masaüstü bir
+ * tarayıcıda, bazen de otomatik bir denetleyiciyle açıyor. Sayfanın
+ * görünmesi JavaScript'in çalışmasına bağlıysa boş bir ekran görme ihtimali
+ * var ve bu 3.1.2'den red demek. Düz HTML böyle bir ihtimal taşımıyor.
+ */
+
+:root {
+  --zemin: #ffffff;
+  --zemin-yumusak: #f5f5f7;
+  --metin: #1d1d1f;
+  --metin-ikincil: #6e6e73;
+  --ayrac: #d2d2d7;
+  --vurgu: #0a63c9;
+  --uyari-zemin: #fff8e6;
+  --uyari-kenar: #e8b931;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --zemin: #16161a;
+    --zemin-yumusak: #1f1f24;
+    --metin: #f2f2f4;
+    --metin-ikincil: #a1a1a8;
+    --ayrac: #34343a;
+    --vurgu: #4c9cf5;
+    --uyari-zemin: #2a2316;
+    --uyari-kenar: #8a6d1f;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--zemin);
+  color: var(--metin);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter,
+    "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  /* Telefonda kenar boşluğu: metin ekranın kenarına yapışmasın. */
+  padding: 0 20px;
+}
+
+.sayfa {
+  /* Okunabilir satır uzunluğu. Yasal metin uzun; 70 karakterin üstüne
+   * çıkınca göz satır başını kaybediyor. */
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 48px 0 72px;
+}
+
+header.ust {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--ayrac);
+  margin-bottom: 36px;
+}
+
+header.ust a {
+  color: var(--metin-ikincil);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+header.ust a:hover { color: var(--vurgu); }
+
+h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px;
+}
+
+h2 {
+  font-size: 1.3rem;
+  letter-spacing: -0.01em;
+  margin: 40px 0 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ayrac);
+}
+
+h3 { font-size: 1.05rem; margin: 28px 0 8px; }
+
+p, li { color: var(--metin); }
+
+a { color: var(--vurgu); }
+
+strong { font-weight: 650; }
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--ayrac);
+  margin: 36px 0;
+}
+
+ul, ol { padding-left: 1.3em; }
+li { margin: 6px 0; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 15px;
+  /* Dar ekranda tablo taşmasın diye sarmalayıcı kaydırılabilir. */
+  display: block;
+  overflow-x: auto;
+}
+
+th, td {
+  border: 1px solid var(--ayrac);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th { background: var(--zemin-yumusak); font-weight: 600; }
+
+blockquote {
+  margin: 20px 0;
+  padding: 14px 18px;
+  background: var(--uyari-zemin);
+  border-left: 3px solid var(--uyari-kenar);
+  border-radius: 0 8px 8px 0;
+}
+
+blockquote p { margin: 0; }
+
+code {
+  background: var(--zemin-yumusak);
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+footer.alt {
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid var(--ayrac);
+  color: var(--metin-ikincil);
+  font-size: 14px;
+}
+
+footer.alt a { color: var(--metin-ikincil); }
+
+/* Ana sayfadaki uygulama kartları. */
+.uygulamalar {
+  list-style: none;
+  padding: 0;
+  margin: 28px 0 0;
+}
+
+.uygulamalar li {
+  border: 1px solid var(--ayrac);
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin: 0 0 14px;
+  background: var(--zemin-yumusak);
+}
+
+.uygulamalar h2 {
+  border: 0;
+  padding: 0;
+  margin: 0 0 4px;
+  font-size: 1.15rem;
+}
+
+.uygulamalar p { margin: 0 0 10px; color: var(--metin-ikincil); font-size: 15px; }
+
+.baglantilar a { margin-right: 16px; font-size: 15px; }

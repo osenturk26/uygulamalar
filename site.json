@@ -1,0 +1,5 @@
+{
+  "_": "Site genelindeki değişkenler. Alan adı alınınca eposta burayı değişmesi yeterli; build.py tüm sayfalara yazıyor.",
+  "yayinci": "",
+  "eposta": ""
+}
