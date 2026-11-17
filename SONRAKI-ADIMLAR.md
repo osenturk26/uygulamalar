@@ -41,6 +41,45 @@ verilecek (`kademe.app` gibi), alt alan adı değil.
 > bağlantısı App Store 3.1.2'nin konusu. Yani ya alan adı baştan doğru
 > olacak ya da eskisi süresiz ayakta tutulacak.
 
+### 15 uygulamada ne oluyor
+
+17 Kas 2026'da hesaplandı. Zaman içinde 10-15 uygulama hedefleniyor ve
+sorulan soru "uygulama başına ne ödeyeceğim" idi. Cevap: **hiçbir şey.**
+
+| Kalem | 1 uygulama | 15 uygulama | Neden |
+|---|---|---|---|
+| Alan adı | ~$12/yıl | ~$12/yıl | Tek alan adı, yollarla bölünüyor |
+| Barındırma | 0 | 0 | GitHub Pages, tek depo |
+| E-posta | 0 | 0 | Yönlendirme, uygulama başına takma ad |
+| Apple Developer | $99/yıl | $99/yıl | Üyelik hesaba ait, uygulamaya değil |
+
+Yollarla gitmenin asıl kazancı burada görünüyor ve barındırma kısıtından
+daha güçlü: **yeni uygulama hiçbir yapılandırma istemiyor.** Alt alan adı
+seçilseydi her uygulama için bir DNS kaydı, bir sertifika beklemesi ve bir
+panel adımı olurdu. Yolla ise yeni uygulama bir klasör demek:
+
+1. `icerik/<uygulama>/` altına üç sayfa
+2. `python3 build.py`
+3. Uygulamanın `--dart-define-from-file` dosyasına üç adres
+4. E-posta takma adı
+
+### E-posta: uygulama başına adres, ücretsiz
+
+Tek bir `destek@` yerine **uygulama başına takma ad** daha iyi:
+`kademe@`, `<uygulama>@`. Gelen kutusunda hangi uygulamadan geldiği
+belli oluyor, ve bir uygulama devredilirse adresi de onunla gidiyor.
+
+Yol: alan adının DNS'i **Cloudflare**'e alınır (alan adı nereden alınmış
+olursa olsun) ve **Email Routing** açılır. Gelen posta yönlendirmesi
+ücretsiz ve alan adı başına 200 kurala kadar çıkıyor; 15 uygulama için
+fazlasıyla yeterli. Hepsi aynı Gmail kutusuna düşer.
+
+> **Tek eksiği yanıt verirken görünen adres.** Yönlendirme gelen postayı
+> taşıyor; `kademe@` adresinden **yanıt** göndermek ayrı bir SMTP
+> istiyor (Gmail'deki "Send mail as"). Mağaza incelemesi için önemli olan
+> postanın ulaşması, o yüzden bu bir engel değil; ama destek yazışması
+> başlayınca halledilmeli.
+
 ---
 
 ## 2. Yönetim paneli
