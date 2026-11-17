@@ -3,7 +3,7 @@ title: "Kademe Gizlilik Politikası"
 aciklama: "Kademe uygulamasının hangi verileri işlediği. Kısa cevap: sayaç okumalarınız varsayılan olarak cihazınızdan çıkmaz."
 ---
 
-**Son güncelleme:** 8 Kasım 2026
+**Son güncelleme:** 17 Kasım 2026
 
 Bu metin Kademe uygulamasının hangi verileri işlediğini anlatır. Kısa cevap:
 **sayaç okumalarınız varsayılan olarak cihazınızdan çıkmaz.**
@@ -83,9 +83,15 @@ gönderilmez.
 
 - **Cihazdaki veriler:** Uygulamayı silmeniz tüm yerel verileri siler.
   Ayarlar'dan sayacı ve okumaları tek tek de silebilirsiniz.
-- **Yedeklenen veriler:** Yedeklemeyi kapatmak eşitlemeyi durdurur.
-  Hesabınızdaki kopyanın tamamen silinmesini isterseniz aşağıdaki adresten
-  talep edebilirsiniz; talebiniz en geç 30 gün içinde yerine getirilir.
+- **Yedeklenen veriler:** Yedeklemeyi kapatmak eşitlemeyi durdurur, sunucudaki
+  kopyayı silmez.
+- **Hesabınızı silmek:** Hesabınızı ve sunucuda tutulan verilerinizin tamamını
+  uygulamanın içinden silebilirsiniz: **Ayarlar → Hesap ve yedekleme →
+  Hesabı sil**. Silme hemen gerçekleşir, geri alınamaz ve bir talep sırası
+  beklemez. Telefonunuzdaki sayaçlar ve okumalar silinmez; uygulama yerel
+  olarak çalışmaya devam eder. Dilerseniz aşağıdaki adresten de talep
+  edebilirsiniz; bu yolla gelen talepler en geç 30 gün içinde yerine
+  getirilir.
 - Silinen kayıtlar, cihazlar arası tutarlılık için en fazla 180 gün boyunca
   yalnızca "silindi" işareti olarak tutulur; içerikleri saklanmaz.
 
