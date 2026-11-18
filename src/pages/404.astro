@@ -1,0 +1,27 @@
+---
+import Temel from '../layouts/Temel.astro';
+import { sayfaIcin } from '../data/site.js';
+---
+
+<Temel baslik="Sayfa bulunamadı" aciklama="Aradığın sayfa burada değil.">
+  <section class="kabuk yok">
+    <p class="etiket">404</p>
+    <h1>Bu sayfa burada değil</h1>
+    <p class="yok__alt">
+      Bağlantı eski olabilir ya da adres yanlış yazılmış olabilir.
+      Aşağıdakiler duruyor:
+    </p>
+    <p class="yok__baglar">
+      <a class="dugme dugme--birincil" href="/">Ana sayfa</a>
+      <a class="dugme dugme--ikincil" href={sayfaIcin('kademe')}>Kademe</a>
+      <a class="dugme dugme--ikincil" href="/kademe/destek.html">Destek</a>
+    </p>
+  </section>
+</Temel>
+
+<style>
+  .yok { padding-block: clamp(56px, 10vw, 120px); max-width: var(--en-metin); }
+  .yok h1 { margin-top: 10px; font-size: var(--t-2xl); }
+  .yok__alt { margin-top: 18px; color: var(--metin-2); max-width: 40ch; }
+  .yok__baglar { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+</style>

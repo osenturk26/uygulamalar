@@ -1,0 +1,20 @@
+{
+  // Gnomon Studio — statik site, Cloudflare Workers statik varlıkları.
+  //
+  // Neden Pages değil: hesabın API token'ı Pages'e kapalı, Workers'a açık.
+  // Sonuç aynı — statik dosyalar kenar ağından, özel alan adıyla, ücretsiz
+  // katmanda sınırsız istek. Cloudflare yeni projeler için zaten bu yolu
+  // öneriyor.
+  //
+  // CNAME dosyası kaldırıldı: o GitHub Pages'e ait. Burada özel alan adı
+  // Worker'ın kendi "custom domain" kaydıyla bağlanıyor.
+  "name": "gnomonstudio",
+  "compatibility_date": "2026-11-18",
+  "assets": {
+    "directory": "./docs",
+    // Adresler .html uzantılı (uygulamanın içine gömülü), bu yüzden
+    // sondaki eğik çizgiyle oynanmıyor.
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

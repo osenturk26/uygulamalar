@@ -3,3 +3,4 @@ site.local.json
 firebase-debug.log
 node_modules/
 .astro/
+.cloudflare.local.json

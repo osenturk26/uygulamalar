@@ -7,9 +7,13 @@
     "dev": "astro dev",
     "kontrol": "node kontrol/icerik-suruklenmesi.mjs",
     "build": "npm run kontrol && astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "dagit": "npm run build && node kontrol/dagit.mjs"
   },
   "dependencies": {
     "astro": "^7.4.12"
+  },
+  "devDependencies": {
+    "wrangler": "^4.164.0"
   }
 }
