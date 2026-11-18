@@ -3,7 +3,7 @@ title: "Kademe Gizlilik Politikası"
 aciklama: "Kademe uygulamasının hangi verileri işlediği. Kısa cevap: sayaç okumalarınız varsayılan olarak cihazınızdan çıkmaz."
 ---
 
-**Son güncelleme:** 17 Kasım 2026
+**Son güncelleme:** 18 Kasım 2026
 
 Bu metin Kademe uygulamasının hangi verileri işlediğini anlatır. Kısa cevap:
 **sayaç okumalarınız varsayılan olarak cihazınızdan çıkmaz.**
@@ -52,7 +52,41 @@ saklanır.
 **Altyapı:** Yedekleme verisi Supabase üzerinde barındırılır. Satır düzeyi
 güvenlik kuralları sayesinde yalnızca kendi kayıtlarınıza erişebilirsiniz.
 
-## 4. Abonelik
+## 4. İsteğe bağlı: fotoğraftan okuma
+
+Kademe Pro'da fatura veya sayaç fotoğrafından değerleri okutabilirsiniz. Bu,
+uygulamadaki **tek istisnadır**: bunun dışındaki her şey cihazınızda kalır.
+
+Özellik **varsayılan olarak kapalıdır**. İlk kullanımdan önce size ne
+olduğunu anlatan bir ekran gösterilir ve onayınız alınır. Onay vermezseniz
+özellik çalışmaz; uygulamanın geri kalanı etkilenmez.
+
+Özellik yalnızca Kademe Pro'da bulunur ve her sürümde açık olmayabilir.
+Uygulamanızda görünmüyorsa bu bölümde anlatılanların hiçbiri gerçekleşmez:
+hiçbir fotoğraf cihazınızdan çıkmaz.
+
+**Fotoğrafa ne oluyor.** Seçtiğiniz fotoğraf sunucumuza, oradan da metin
+okuyan yapay zekâ modeline (OpenAI) gönderilir. Model fatura veya sayaç
+üzerindeki sayıları okur ve yalnızca bu sayıları geri döndürür. Fotoğraf
+hiçbir yere kaydedilmez: ne sunucumuzun diskine, ne bir depolama alanına, ne
+de günlük kayıtlarına yazılır. İstekle birlikte gelir, yanıtla birlikte
+silinir.
+
+**Neyin okunduğu.** Faturadan yalnızca hesapla ilgili satırlar okunur: okuma
+tarihi, düzeltme katsayısı, üst ısıl değer, kademe birim fiyatları ve sayaç
+endeksi. Faturadaki ad, adres, abone numarası ve tesisat numarası
+**istenmez ve saklanmaz**.
+
+**Kaydedilenler.** Fotoğraf saklanmasa da, aylık kullanım hakkınızı takip
+edebilmek için şunlar tutulur: 3. bölümde anlatılan anonim kimliğiniz, ay, ve
+o ay kaç kez okuma yaptığınız. Bu kayıt fotoğrafın içeriğiyle ilgili hiçbir
+bilgi taşımaz.
+
+**Fotoğraf arşivinize erişmiyoruz.** Yalnızca o an seçtiğiniz tek kareyi
+alırız. Galerinizi tarayamaz, listeleyemez ve başka bir fotoğrafa
+erişemeyiz.
+
+## 5. Abonelik
 
 Kademe Pro aboneliği App Store veya Google Play üzerinden satılır ve
 RevenueCat ile yönetilir. **Ödeme bilgileriniz bize ulaşmaz**; kart
@@ -62,7 +96,7 @@ aboneliğinizin etkin olup olmadığıdır.
 Abonelik için hesap açmanız gerekmez; satın alma mağaza hesabınıza bağlıdır
 ve "Satın alımları geri yükle" ile her cihazda geri getirilebilir.
 
-## 5. Yapmadıklarımız
+## 6. Yapmadıklarımız
 
 - **Reklam göstermiyoruz** ve hiçbir reklam ağı kullanmıyoruz.
 - **Sizi takip etmiyoruz.** Reklam kimliği (IDFA) okumuyoruz, cihaz parmak
@@ -71,15 +105,18 @@ ve "Satın alımları geri yükle" ile her cihazda geri getirilebilir.
 - **Verilerinizi satmıyoruz** ve pazarlama amacıyla üçüncü taraflarla
   paylaşmıyoruz.
 - **Konumunuza erişmiyoruz.** İl bilgisini siz seçersiniz; GPS kullanılmaz.
-- **Rehberinize, fotoğraflarınıza veya kameranıza erişmiyoruz.**
+- **Rehberinize erişmiyoruz.**
+- **Fotoğraf arşivinizi taramıyoruz.** Kamera ve fotoğraflar yalnızca
+  fotoğraftan okuma özelliğini siz kullandığınızda devreye girer ve orada da
+  yalnızca o an seçtiğiniz tek kare alınır (4. bölüm).
 
-## 6. Tarife verisi
+## 7. Tarife verisi
 
 İl bazlı aylık limitler BOTAŞ'ın yayımladığı kamuya açık tablodan gelir ve
 uygulamayla birlikte dağıtılır. Bu veriyi almak için sizden hiçbir bilgi
 gönderilmez.
 
-## 7. Veri saklama ve silme
+## 8. Veri saklama ve silme
 
 - **Cihazdaki veriler:** Uygulamayı silmeniz tüm yerel verileri siler.
   Ayarlar'dan sayacı ve okumaları tek tek de silebilirsiniz.
@@ -95,24 +132,24 @@ gönderilmez.
 - Silinen kayıtlar, cihazlar arası tutarlılık için en fazla 180 gün boyunca
   yalnızca "silindi" işareti olarak tutulur; içerikleri saklanmaz.
 
-## 8. Haklarınız (KVKK)
+## 9. Haklarınız (KVKK)
 
 6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında; işlenen
 verileriniz hakkında bilgi talep etme, düzeltilmesini veya silinmesini
 isteme ve işlemeye itiraz etme haklarına sahipsiniz. Talepleriniz için
 aşağıdaki adrese yazabilirsiniz.
 
-## 9. Çocuklar
+## 10. Çocuklar
 
 Uygulama 13 yaş altı kullanıcılara yönelik değildir ve bilerek bu yaş
 grubundan veri toplamaz.
 
-## 10. Değişiklikler
+## 11. Değişiklikler
 
 Bu metinde önemli bir değişiklik olursa uygulama içinde bildirilir ve
 yukarıdaki tarih güncellenir.
 
-## 11. İletişim
+## 12. İletişim
 
 Gizlilikle ilgili her konu için: **{{EPOSTA}}**
 

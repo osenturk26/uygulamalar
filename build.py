@@ -40,14 +40,15 @@ def main() -> int:
         return 1
 
     ayar = ayarlar()
+    alan = ayar.get("alan_adi", "")
     eposta = ayar.get("eposta", "")
     yayinci = ayar.get("yayinci", "")
 
-    if not eposta:
+    if not eposta and not alan:
         # Yayımlanmış bir gizlilik politikasında iletişim adresi zorunlu.
         # Derlemeyi durdurmuyoruz ki site kurulurken test edilebilsin, ama
         # sessizce geçmek de doğru değil.
-        print("⚠️  site.json içinde 'eposta' boş — sayfalarda yer tutucu kalacak.")
+        print("⚠️  site.json içinde 'alan_adi' ve 'eposta' boş — sayfalarda yer tutucu kalacak.")
 
     if CIKTI.exists():
         shutil.rmtree(CIKTI)
@@ -57,6 +58,15 @@ def main() -> int:
     # GitHub Pages varsayılan olarak Jekyll çalıştırıyor ve alt çizgiyle
     # başlayan dosyaları atlıyor. Bizim üretimimiz zaten bitmiş HTML.
     (CIKTI / ".nojekyll").write_text("")
+
+    # CNAME **üretiliyor**, elle tutulmuyor. Sebebi hemen yukarıdaki
+    # `rmtree`: docs/ her derlemede sıfırlanıyor, yani elle konan bir
+    # CNAME ilk `python3 build.py` çağrısında uçar. GitHub Pages o dosyayı
+    # kaybedince özel alan adını da bırakıyor ve site github.io adresine
+    # düşüyor; uygulamaların içine derlenmiş gizlilik bağlantısı da
+    # kırılıyor (App Store 3.1.2). Tek kaynak site.json olsun.
+    if alan:
+        (CIKTI / "CNAME").write_text(alan + "\n")
 
     sayilar = 0
     for md in sorted(KAYNAK.rglob("*.md")):
@@ -93,7 +103,17 @@ def main() -> int:
             print(f"pandoc hatası ({md}):\n{sonuc.stderr}", file=sys.stderr)
             return 1
 
-        html = sonuc.stdout.replace("{{EPOSTA}}", eposta or "(iletişim adresi eklenmedi)")
+        # Adres uygulamanın **klasör adından** türüyor: icerik/kademe/...
+        # sayfaları kademe@alanadi görüyor. İki kazancı var: gelen kutusunda
+        # hangi uygulamadan geldiği belli oluyor, ve yeni uygulama yine
+        # yalnız bir klasör demek, site.json'a satır eklemek gerekmiyor.
+        # Kök sayfa site genelindeki adresi kullanıyor.
+        if derinlik and alan:
+            sayfa_eposta = f"{goreli.parts[0]}@{alan}"
+        else:
+            sayfa_eposta = eposta
+
+        html = sonuc.stdout.replace("{{EPOSTA}}", sayfa_eposta or "(iletişim adresi eklenmedi)")
         hedef.write_text(html)
         sayilar += 1
         print(f"  {md} → {hedef}")

@@ -1,5 +1,8 @@
 {
-  "_": "Site genelindeki değişkenler. Alan adı alınınca eposta burayı değişmesi yeterli; build.py tüm sayfalara yazıyor.",
-  "yayinci": "",
-  "eposta": ""
+  "_": "Site genelindeki değişkenler; build.py tüm sayfalara yazıyor.",
+  "__alan_adi": "docs/CNAME bundan üretiliyor ve uygulama adresleri de buradan türüyor (icerik/kademe/... -> kademe@...).",
+  "__eposta": "Yalnız kök sayfanın adresi. Uygulama sayfaları kendi klasör adını kullanıyor.",
+  "alan_adi": "gnomonstudio.com",
+  "yayinci": "Gnomon Studio",
+  "eposta": "hello@gnomonstudio.com"
 }
