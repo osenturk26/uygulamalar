@@ -11,7 +11,7 @@ Kademe'yi kullanarak bu koşulları kabul etmiş olursunuz.
 ---
 
 - **Hizmet sağlayıcı:** Oğuzhan Şentürk (Gnomon Studio)
-- **İletişim:** kademe@gnomonstudio.com
+- **İletişim:** <!--email_off-->kademe@gnomonstudio.com<!--/email_off-->
 
 Bu koşullar, uygulamayı kullanan sizinle yukarıdaki hizmet sağlayıcı
 arasındadır.
@@ -99,5 +99,5 @@ Türkiye Cumhuriyeti hukuku uygulanır.
 
 ## 10. İletişim
 
-**kademe@gnomonstudio.com**
+**<!--email_off-->kademe@gnomonstudio.com<!--/email_off-->**
 

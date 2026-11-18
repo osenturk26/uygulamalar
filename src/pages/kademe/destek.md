@@ -8,7 +8,7 @@ Kademe, Türkiye'de konut doğal gazındaki **kademeli tarifeyi** takip eder.
 İlinizin o ay için belirlenen hane limitini bilir, ne kadar kaldığınızı
 söyler ve limiti aşarsanız faturanın kaç lira artacağını gösterir.
 
-Bir sorunuz ya da bildireceğiniz bir sorun varsa yazın: **kademe@gnomonstudio.com**
+Bir sorunuz ya da bildireceğiniz bir sorun varsa yazın: **<!--email_off-->kademe@gnomonstudio.com<!--/email_off-->**
 Genelde aynı gün içinde dönüyoruz.
 
 ## Sık sorulanlar
