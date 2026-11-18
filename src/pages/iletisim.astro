@@ -12,10 +12,10 @@ import { site, uygulamalar, epostaIcin, sayfaIcin } from '../data/site.js';
         Bir sorunuz ya da bildireceğiniz bir sorun varsa yazın.
         Genelde aynı gün içinde dönüyoruz.
       </p>
-      <a class="genel" href={`mailto:${site.eposta}`}>
+      <!--email_off--><a class="genel" href={`mailto:${site.eposta}`}>
         <span class="genel__etiket">Genel konular</span>
-        <span class="genel__adres"><!--email_off-->{site.eposta}<!--/email_off--></span>
-      </a>
+        <span class="genel__adres">{site.eposta}</span>
+      </a><!--/email_off-->
     </div>
   </section>
 
@@ -33,11 +33,11 @@ import { site, uygulamalar, epostaIcin, sayfaIcin } from '../data/site.js';
       <ul class="adresler">
         {uygulamalar.map((u) => (
           <li class="belir">
-            <a class="adres" href={`mailto:${epostaIcin(u.slug)}`}>
+            <!--email_off--><a class="adres" href={`mailto:${epostaIcin(u.slug)}`}>
               <img src={u.ikon} alt="" width="44" height="44" />
               <span class="adres__ad">{u.ad}</span>
-              <span class="adres__posta"><!--email_off-->{epostaIcin(u.slug)}<!--/email_off--></span>
-            </a>
+              <span class="adres__posta">{epostaIcin(u.slug)}</span>
+            </a><!--/email_off-->
           </li>
         ))}
       </ul>
