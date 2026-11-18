@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 // Çıktı `docs/` altına yazılıyor ve depoya commit ediliyor.
 //
@@ -23,6 +24,24 @@ import { defineConfig } from 'astro/config';
 // boş ekran 3.1.2'den red demek.
 export default defineConfig({
   site: 'https://gnomonstudio.com',
+  // Sitemap `site` değerine ihtiyaç duyuyor; adresler mutlak üretiliyor.
+  //
+  // serialize şart: eklenti `build.format` ayarını bilmiyor ve adresleri
+  // uzantısız üretiyor (/hakkimizda). Bizde her sayfa .html olarak
+  // yayımlandığı için o adresler 404 verirdi — kırık adreslerle dolu bir
+  // site haritası, hiç site haritası olmamasından kötüdür.
+  integrations: [
+    sitemap({
+      serialize(oge) {
+        const u = new URL(oge.url);
+        if (u.pathname !== '/' && !u.pathname.endsWith('.html')) {
+          u.pathname = u.pathname.replace(/\/$/, '') + '.html';
+          oge.url = u.toString();
+        }
+        return oge;
+      },
+    }),
+  ],
   outDir: './docs',
   build: {
     // 'file' = /kademe/gizlilik.html. Uzantısız "temiz adres" DEĞİL, çünkü

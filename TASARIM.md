@@ -289,5 +289,7 @@ açıyor, boş ekran 3.1.2'den red. Astro varsayılanı zaten sıfır JS.
 |---|---|
 | ~~**Başlık yazı tipi**~~ | ✅ Familjen Grotesk, 24 KB alt küme (§3.3). |
 | ~~**Gnomon logosu**~~ | ✅ Çizildi — güneş saati kadranı + gölge yarığı (§4). |
-| **Ekran görüntüleri** | Taslak — tarayıcı panelinden 709–860 px alınmış. Simülatörden yeniden çekilmeli. |
-| **Dil** | v1 Türkçe. `/en/` yapısı baştan kurulacak ama boş kalacak. |
+| ~~**Ekran görüntüleri**~~ | ✅ Simülatörden çekildi (iPhone 16 Pro Max, 1320×2868, koyu tema). |
+| **Dil** | v1 Türkçe. `/en/` henüz kurulmadı; ajans/yatırım tarafı gündeme gelince açılacak. |
+| **HTTPS** | GitHub sertifikayı henüz vermedi. DNS doğru (CAA engeli yok, dört A kaydı, www CNAME). Normal penceresi 24 saat; geçerse alan adını panelden kaldırıp yeniden eklemek gerekiyor. |
+| **Mağaza rozetleri** | Uygulama yayımlanınca App Store / Google Play rozetleri eklenecek. |

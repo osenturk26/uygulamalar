@@ -11,6 +11,7 @@
     "dagit": "npm run build && node kontrol/dagit.mjs"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.6",
     "astro": "^7.4.12"
   },
   "devDependencies": {

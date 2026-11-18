@@ -1,0 +1,5 @@
+# Gnomon Studio
+User-agent: *
+Allow: /
+
+Sitemap: https://gnomonstudio.com/sitemap-index.xml
