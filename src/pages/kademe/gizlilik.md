@@ -11,6 +11,12 @@ Bu metin Kademe uygulamasının hangi verileri işlediğini anlatır. Kısa ceva
 
 ---
 
+- **Veri sorumlusu:** Oğuzhan Şentürk (Gnomon Studio)
+- **İletişim ve başvuru:** kademe@gnomonstudio.com
+
+6698 sayılı Kanun'un 10. maddesi uyarınca yapılan aydınlatma bu metindir.
+Haklarınıza ilişkin taleplerinizi 11. bölümdeki yollarla iletebilirsiniz.
+
 ## 1. Varsayılan: her şey cihazda
 
 Uygulamayı kurduğunuzda hiçbir hesap açmanız gerekmez ve hiçbir veriniz

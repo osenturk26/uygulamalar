@@ -4,11 +4,17 @@ baslik: "Kademe Kullanım Koşulları"
 aciklama: "Kademe uygulamasının kullanım koşulları, abonelik şartları ve sorumluluk sınırları."
 ustBaslik: "Kademe"
 ---
-**Son güncelleme:** 8 Kasım 2026
+**Son güncelleme:** 19 Kasım 2026
 
 Kademe'yi kullanarak bu koşulları kabul etmiş olursunuz.
 
 ---
+
+- **Hizmet sağlayıcı:** Oğuzhan Şentürk (Gnomon Studio)
+- **İletişim:** kademe@gnomonstudio.com
+
+Bu koşullar, uygulamayı kullanan sizinle yukarıdaki hizmet sağlayıcı
+arasındadır.
 
 ## 1. Uygulama ne yapar
 
