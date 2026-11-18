@@ -1,0 +1,81 @@
+---
+import Temel from '../layouts/Temel.astro';
+import { site } from '../data/site.js';
+---
+
+<Temel
+  baslik="Hakkımızda"
+  aciklama="Gnomon, güneş saatinin gölgeyi düşüren çubuğu. Hesap yapmaz; zaten orada olanı okunur kılar."
+>
+  <article class="kabuk govde">
+    <p class="etiket">Hakkımızda</p>
+    <h1>Adımız yaptığımız işi anlatıyor</h1>
+
+    <p class="onsoz">
+      <strong>Gnomon</strong>, güneş saatinin gölgeyi düşüren çubuğudur.
+      Bilinen en eski bilimsel alet. Hesap yapmaz, bir şey üretmez —
+      zaten orada olanı <strong>okunur kılar</strong>. Saati yaratmaz,
+      saatin görülmesini sağlar.
+    </p>
+
+    <p>
+      Yaptığımız iş birebir bu. Doğal gazdaki kademe limiti zaten var.
+      Senin tüketimin zaten var. Arada duran uçurum da zaten orada.
+      Kademe bunların hiçbirini üretmiyor; sen düşmeden önce görünür
+      kılıyor.
+    </p>
+
+    <p>
+      Bu yüzden söylediğimiz şey “hayatı kolaylaştıran uygulamalar
+      yapıyoruz” değil. Onu herkes söylüyor ve hiçbir şey vaat etmiyor.
+      Bizimki bir söz:
+    </p>
+
+    <p class="soz">{site.slogan}</p>
+
+    <h2>Nasıl çalışıyoruz</h2>
+
+    <h3>Bilmediğimizi söyleriz</h3>
+    <p>
+      Kademe, ay başında okuman yoksa bunu sana söyler ve sonucu{' '}
+      <strong>“tahmini”</strong> diye işaretler. Yanlış bir güven vermektense
+      eksik olduğunu bilmen daha iyi.
+    </p>
+
+    <h3>Veri sende kalır</h3>
+    <p>
+      Sayaç okumaların varsayılan olarak telefonundan çıkmaz. Hesaplar
+      cihazında yapılır, internet gerekmez. Yedeklemeyi açmak senin kararın
+      ve açtığında bunu sana açıkça söyleriz.
+    </p>
+
+    <h3>Tek soru, iyi cevap</h3>
+    <p>
+      Her uygulama tek bir soruya cevap veriyor. Soruyu çoğaltmak yerine
+      cevabı iyileştirmeyi tercih ediyoruz.
+    </p>
+  </article>
+</Temel>
+
+<style>
+  .govde { max-width: var(--en-metin); padding-block: clamp(40px, 7vw, 72px); }
+  .govde h1 { font-size: var(--t-2xl); margin: 10px 0 28px; }
+  .govde h2 {
+    margin: 48px 0 16px;
+    padding-top: 20px;
+    border-top: 1px solid var(--ayrac);
+  }
+  .govde h3 { margin: 28px 0 8px; }
+  .onsoz { font-size: var(--t-l); color: var(--metin); }
+  .govde p { color: var(--metin-2); }
+  .onsoz, .soz { color: var(--metin); }
+
+  .soz {
+    font-size: var(--t-xl);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    border-left: 3px solid var(--vurgu);
+    padding: 4px 0 4px 20px;
+    margin: 28px 0;
+  }
+</style>

@@ -1,0 +1,103 @@
+---
+/* Yasal metinler ve destek sayfaları.
+ *
+ * Vitrinden ayrı bir düzen, bilerek: burada uzun metin okunuyor, sanat
+ * yönetimi değil okunabilirlik önde. Bu yüzden `.belge` teması sistem
+ * tercihine uyuyor (açık/koyu) ve satır uzunluğu 44rem'de tutuluyor.
+ *
+ * SIFIR JAVASCRIPT. App Store incelemesi gizlilik adresini bazen otomatik
+ * bir denetleyiciyle açıyor; sayfanın görünmesi JS'e bağlıysa boş ekran
+ * ihtimali var ve bu 3.1.2'den red demek. Astro varsayılanı zaten script
+ * üretmiyor — buraya `client:*` direktifi KONMAMALI.
+ */
+import Temel from './Temel.astro';
+
+const { frontmatter } = Astro.props;
+const baslik = Astro.props.baslik ?? frontmatter?.baslik ?? frontmatter?.title;
+const aciklama = Astro.props.aciklama ?? frontmatter?.aciklama;
+const ustBaslik = Astro.props.ustBaslik ?? frontmatter?.ustBaslik;
+---
+
+<Temel baslik={baslik} aciklama={aciklama} tema="belge">
+  <article class="belge-govde kabuk">
+    {ustBaslik && <p class="etiket">{ustBaslik}</p>}
+    <h1>{baslik}</h1>
+    <div class="yazi">
+      <slot />
+    </div>
+  </article>
+</Temel>
+
+<style>
+  .belge-govde {
+    max-width: var(--en-metin);
+    padding-top: 40px;
+  }
+
+  .belge-govde h1 {
+    font-size: var(--t-2xl);
+    margin-bottom: 28px;
+  }
+
+  .etiket { margin-bottom: 10px; }
+
+  /* Markdown içeriği slot'tan geliyor, yani bu bileşene ait değil —
+   * Astro'nun kapsamlı stilleri ona değmez. :global şart. */
+  .yazi :global(h2) {
+    font-size: var(--t-xl);
+    margin: 44px 0 12px;
+    padding-top: 18px;
+    border-top: 1px solid var(--ayrac);
+  }
+
+  .yazi :global(h3) {
+    font-size: var(--t-l);
+    margin: 30px 0 8px;
+  }
+
+  .yazi :global(p),
+  .yazi :global(li) { color: var(--metin); }
+
+  .yazi :global(ul),
+  .yazi :global(ol) { padding-left: 1.3em; }
+  .yazi :global(li) { margin: 6px 0; }
+
+  .yazi :global(hr) {
+    border: 0;
+    border-top: 1px solid var(--ayrac);
+    margin: 36px 0;
+  }
+
+  .yazi :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: var(--t-s);
+    /* Dar ekranda taşmasın */
+    display: block;
+    overflow-x: auto;
+  }
+  .yazi :global(th),
+  .yazi :global(td) {
+    border: 1px solid var(--ayrac);
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .yazi :global(th) { background: var(--yuzey); font-weight: 600; }
+
+  .yazi :global(blockquote) {
+    margin: 20px 0;
+    padding: 14px 18px;
+    background: var(--yuzey);
+    border-left: 3px solid var(--vurgu);
+    border-radius: 0 var(--yuvarlak) var(--yuvarlak) 0;
+  }
+
+  .yazi :global(code) {
+    background: var(--yuzey);
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+</style>

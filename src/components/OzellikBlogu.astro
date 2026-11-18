@@ -1,0 +1,35 @@
+---
+/* Özellik bloğu: bir yanda görsel, diğer yanda metin; sırayla yön değişiyor.
+ * Ora Weather'ın kalıbı — kanıtlanmış ve 15 uygulamada tekrarlanabilir. */
+interface Props { ustBaslik: string; baslik: string; ters?: boolean; }
+const { ustBaslik, baslik, ters = false } = Astro.props;
+---
+
+<section class={`blok${ters ? ' blok--ters' : ''}`}>
+  <div class="blok__gorsel"><slot name="gorsel" /></div>
+  <div class="blok__yazi">
+    <p class="etiket ust">{ustBaslik}</p>
+    <h2>{baslik}</h2>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .blok {
+    display: grid;
+    gap: clamp(28px, 5vw, 56px);
+    align-items: center;
+    padding-block: clamp(36px, 6vw, 72px);
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 52rem) {
+    .blok { grid-template-columns: 1fr 1fr; }
+    .blok--ters .blok__gorsel { order: 2; }
+  }
+
+  .ust { color: var(--vurgu); }
+
+  .blok h2 { margin: 10px 0 14px; max-width: 18ch; }
+  .blok__yazi :global(p) { color: var(--metin-2); max-width: 46ch; }
+</style>

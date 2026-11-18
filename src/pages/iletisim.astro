@@ -1,0 +1,42 @@
+---
+import Temel from '../layouts/Temel.astro';
+import { site, uygulamalar, epostaIcin } from '../data/site.js';
+---
+
+<Temel baslik="İletişim" aciklama={`${site.ad} iletişim adresleri.`}>
+  <article class="kabuk govde">
+    <p class="etiket">İletişim</p>
+    <h1>Yazın</h1>
+    <p class="onsoz">
+      Genel konular için <a href={`mailto:${site.eposta}`}>{site.eposta}</a>.
+      Bir uygulamayla ilgili bir sorunuz ya da bildireceğiniz bir sorun varsa,
+      doğrudan o uygulamanın adresine yazmanız daha hızlı döner.
+    </p>
+
+    <ul class="adresler">
+      {uygulamalar.map((u) => (
+        <li>
+          <span class="adresler__ad">{u.ad}</span>
+          <a href={`mailto:${epostaIcin(u.slug)}`}>{epostaIcin(u.slug)}</a>
+        </li>
+      ))}
+    </ul>
+  </article>
+</Temel>
+
+<style>
+  .govde { max-width: var(--en-metin); padding-block: clamp(40px, 7vw, 72px); }
+  .govde h1 { font-size: var(--t-2xl); margin: 10px 0 24px; }
+  .onsoz { color: var(--metin-2); }
+
+  .adresler { list-style: none; padding: 0; margin: 32px 0 0; }
+  .adresler li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 16px 0;
+    border-top: 1px solid var(--ayrac);
+  }
+  .adresler__ad { font-weight: 600; }
+</style>

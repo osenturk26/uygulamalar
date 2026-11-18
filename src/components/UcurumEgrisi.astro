@@ -1,0 +1,118 @@
+---
+/* Uçurum eğrisi — ürünün imza görseli.
+ *
+ * Kademeli tarifenin anlaşılmayan yanı fiyatın blok değil SIÇRAMA olması.
+ * "1.204 TL" tek başına soyut kalıyor; eğri, faturanın tüketimin sürekli
+ * bir fonksiyonu olmadığını tek bakışta gösteriyor.
+ *
+ * Uygulamanın kendi grafiğinin birebir karşılığı (lib/features/dashboard)
+ * ama ekran görüntüsü değil, çizim: depodaki yakalamalar taslak ve kesik.
+ * Renkler Kademe'nin kendi durum tonları (app_colors.dart › dark).
+ *
+ * Dolu nokta = şu an (ölçülmüş). İçi boş halka = ay sonu tahmini
+ * (gerçekleşmemiş). Uygulamada da bu ayrım var: gerçekleşmemiş bir değeri
+ * dolu göstermek ölçülmüş veriyle karıştırıyordu.
+ */
+const YESIL = '#3DD68C';   /* dark.safe.fill */
+const KIRMIZI = '#F2555A'; /* dark.exceeded.fill */
+---
+
+<figure class="egri">
+  <svg viewBox="0 0 400 268" role="img" aria-labelledby="ue-b ue-a">
+    <title id="ue-b">Kademeli tarifede fatura eğrisi</title>
+    <desc id="ue-a">
+      Fatura limite kadar yavaş yükseliyor, limitte dikey olarak 1.204 TL
+      sıçrıyor ve sonrasında daha dik devam ediyor.
+    </desc>
+
+    <defs>
+      <linearGradient id="ue-yesil" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color={YESIL} stop-opacity="0.26" />
+        <stop offset="100%" stop-color={YESIL} stop-opacity="0.02" />
+      </linearGradient>
+      <linearGradient id="ue-kirmizi" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color={KIRMIZI} stop-opacity="0.3" />
+        <stop offset="100%" stop-color={KIRMIZI} stop-opacity="0.02" />
+      </linearGradient>
+    </defs>
+
+    <!-- taban çizgisi -->
+    <line x1="24" y1="212" x2="384" y2="212" stroke="currentColor" stroke-opacity="0.16" />
+
+    <!-- limitte kopuş -->
+    <line x1="240" y1="24" x2="240" y2="220" stroke="currentColor"
+          stroke-opacity="0.3" stroke-dasharray="4 5" />
+
+    <!-- limite kadar: yavaş yükseliş -->
+    <path d="M24 212 L24 206 L240 142 L240 212 Z" fill="url(#ue-yesil)" />
+    <path d="M24 206 L240 142" fill="none" stroke={YESIL} stroke-width="3"
+          stroke-linecap="round" class="cizgi" />
+
+    <!-- limitten sonra: aynı gaz, üst kademe -->
+    <path d="M240 72 L384 32 L384 212 L240 212 Z" fill="url(#ue-kirmizi)" />
+    <path d="M240 72 L384 32" fill="none" stroke={KIRMIZI} stroke-width="3"
+          stroke-linecap="round" class="cizgi cizgi--gec" />
+
+    <!-- dikey sıçrama -->
+    <path d="M240 142 L240 72" fill="none" stroke={KIRMIZI} stroke-width="3"
+          stroke-linecap="round" class="sicrama" />
+    <path d="M234 78 L240 70 L246 78" fill="none" stroke={KIRMIZI}
+          stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="sicrama" />
+
+    <!-- şu an: ölçülmüş, dolu -->
+    <circle cx="100" cy="183" r="5.5" fill={YESIL} />
+    <!-- ay sonu tahmini: gerçekleşmemiş, içi boş -->
+    <circle cx="316" cy="52" r="5.5" fill="none" stroke={KIRMIZI} stroke-width="3" />
+
+    <!-- sıçramanın bedeli -->
+    <g class="rozet">
+      <rect x="252" y="92" width="92" height="28" rx="8"
+            fill={KIRMIZI} fill-opacity="0.16" stroke={KIRMIZI} stroke-opacity="0.45" />
+      <text x="298" y="111" text-anchor="middle" fill={KIRMIZI}
+            font-size="15" font-weight="680">+1.204 ₺</text>
+    </g>
+
+    <text x="24" y="238" fill="currentColor" fill-opacity="0.5" font-size="13">0 Sm³</text>
+    <text x="240" y="238" text-anchor="middle" fill="currentColor"
+          fill-opacity="0.5" font-size="13">limit 136,01</text>
+  </svg>
+
+  <figcaption>
+    Limite kadar yeşil, limitte kopuş, sonrası kırmızı. Pahalanan şey aşan
+    kısım değil, <strong>ayın tamamı</strong>.
+  </figcaption>
+</figure>
+
+<style>
+  .egri {
+    margin: 0;
+    padding: 24px 20px 18px;
+    border: 1px solid var(--ayrac);
+    border-radius: var(--yuvarlak-buyuk);
+    background: var(--yuzey);
+    box-shadow: var(--dusey-gol-kucuk), var(--kenar-isik);
+    color: var(--metin);
+  }
+
+  .egri svg { width: 100%; height: auto; display: block; }
+
+  figcaption {
+    margin-top: 14px;
+    font-size: var(--t-s);
+    color: var(--metin-2);
+  }
+
+  /* Eğri soldan sağa çiziliyor, sıçrama sonda beliriyor: sırayla okunuyor.
+   * "Hareketi Azalt" açıkken global kural hepsini son karesine sabitliyor. */
+  .cizgi {
+    stroke-dasharray: 240;
+    stroke-dashoffset: 240;
+    animation: ciz 900ms ease-out both;
+  }
+  .cizgi--gec { animation-delay: 1000ms; }
+  .sicrama { opacity: 0; animation: belir 400ms ease-out 820ms both; }
+  .rozet { opacity: 0; animation: belir 400ms ease-out 1100ms both; }
+
+  @keyframes ciz { to { stroke-dashoffset: 0; } }
+  @keyframes belir { to { opacity: 1; } }
+</style>

@@ -1,0 +1,50 @@
+---
+/* Ana ekrandaki tek uygulama ikonu. */
+interface Props { ad: string; ikon: string; href: string; }
+const { ad, ikon, href } = Astro.props;
+---
+
+<a class="oge" href={href}>
+  <img src={ikon} alt="" width="120" height="120" />
+  <span class="oge__ad">{ad}</span>
+  <span class="gizli">uygulamasının sayfasına git</span>
+</a>
+
+<style>
+  .oge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4em;
+    text-decoration: none;
+    width: 4.4em;
+  }
+
+  .oge img {
+    width: 100%;
+    height: auto;
+    /* iOS maskesine yakın yuvarlaklık; ikon kare üretiliyor, köşeyi
+     * cihazda sistem uyguluyor, burada biz uyguluyoruz. */
+    border-radius: 23%;
+    box-shadow: 0 0.5em 1em -0.35em rgb(0 0 0 / 0.55);
+  }
+
+  .oge__ad {
+    font-size: 0.62em;
+    color: #fff;
+    text-shadow: 0 1px 3px rgb(0 0 0 / 0.6);
+    white-space: nowrap;
+  }
+
+  .oge:hover img { transform: scale(1.04); }
+  .oge img { transition: transform 160ms ease; }
+
+  .gizli {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+</style>

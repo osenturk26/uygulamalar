@@ -1,0 +1,125 @@
+---
+import Temel from '../layouts/Temel.astro';
+import AnaEkran from '../components/AnaEkran.astro';
+import { uygulamalar, sayfaIcin } from '../data/site.js';
+
+const yayinda = uygulamalar.filter((u) => u.durum === 'yayinda').length;
+---
+
+<Temel
+  baslik="Uygulamalar"
+  aciklama="Gnomon Studio'nun uygulamaları. Her biri tek bir soruya cevap veriyor."
+>
+  <section class="kabuk bas">
+    <h1>Uygulamalar</h1>
+    <p class="bas__alt">
+      Yaptığımız her uygulama tek bir soruya cevap veriyor. Şu an bir tane
+      var; ızgara doldukça burası da dolacak.
+    </p>
+  </section>
+
+  <section class="sahne">
+    <div class="kabuk">
+      <AnaEkran en="min(360px, 84vw)" />
+    </div>
+  </section>
+
+  <section class="kabuk liste-bolum">
+    <ul class="liste">
+      {uygulamalar.map((u) => (
+        <li>
+          <a href={sayfaIcin(u.slug)}>
+            <img src={u.ikon} alt="" width="56" height="56" />
+            <span class="liste__ad">
+              {u.ad}
+              {u.durum === 'yakinda' && <span class="rozet">Yakında</span>}
+            </span>
+            <span class="liste__ozet">{u.ozet}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    {yayinda === 0 && (
+      <p class="not">
+        Hiçbiri henüz mağazada değil. Çıktığında App Store ve Google Play
+        bağlantıları buraya gelecek — uydurma rozet koymuyoruz.
+      </p>
+    )}
+  </section>
+</Temel>
+
+<style>
+  .bas { padding-block: clamp(40px, 7vw, 72px) 0; }
+  .bas h1 { font-size: var(--t-2xl); }
+  .bas__alt { margin-top: 16px; color: var(--metin-2); max-width: 46ch; }
+
+  .sahne {
+    padding-block: clamp(40px, 6vw, 72px);
+    background: radial-gradient(
+      90% 70% at 50% 0%,
+      rgb(233 162 59 / 0.1) 0%,
+      transparent 62%
+    );
+  }
+
+  .liste-bolum { padding-bottom: clamp(32px, 5vw, 56px); }
+
+  .liste { list-style: none; padding: 0; margin: 0; }
+
+  .liste a {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: 'ikon ad' 'ikon ozet';
+    column-gap: 18px;
+    row-gap: 4px;
+    align-items: center;
+    padding: 18px 0;
+    border-top: 1px solid var(--ayrac);
+    text-decoration: none;
+    color: var(--metin);
+  }
+  .liste a:hover .liste__ad { color: var(--vurgu); }
+
+  .liste img {
+    grid-area: ikon;
+    border-radius: 23%;
+    box-shadow: var(--dusey-gol-kucuk);
+  }
+
+  .liste__ad {
+    grid-area: ad;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 650;
+    font-size: var(--t-l);
+    align-self: end;
+  }
+
+  .liste__ozet {
+    grid-area: ozet;
+    color: var(--metin-2);
+    font-size: var(--t-s);
+    align-self: start;
+  }
+
+  .rozet {
+    font-size: var(--t-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ham-golge);
+    background: var(--vurgu);
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  .not {
+    margin-top: 28px;
+    padding: 18px 20px;
+    border: 1px dashed var(--ayrac);
+    border-radius: var(--yuvarlak);
+    color: var(--metin-2);
+    font-size: var(--t-s);
+  }
+</style>

@@ -1,0 +1,189 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site.js';
+import Logo from '../components/Logo.astro';
+
+interface Props {
+  baslik: string;
+  aciklama?: string;
+  tema?: 'koyu' | 'belge';
+  /** Sayfa başlığına site adı eklensin mi (ana sayfada gereksiz) */
+  cipli?: boolean;
+}
+
+const { baslik, aciklama, tema = 'koyu', cipli = true } = Astro.props;
+const tamBaslik = cipli ? `${baslik} · ${site.ad}` : baslik;
+const yil = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="tr" class={tema}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{tamBaslik}</title>
+  {aciklama && <meta name="description" content={aciklama} />}
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+  <meta property="og:title" content={tamBaslik} />
+  {aciklama && <meta property="og:description" content={aciklama} />}
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="og:image" content={new URL('/og.png', Astro.site)} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link
+    rel="preload"
+    href="/fonts/inter.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin
+  />
+</head>
+<body>
+  <a class="atla" href="#icerik">İçeriğe geç</a>
+
+  <header class="ust">
+    <div class="kabuk ust__ic">
+      <a class="marka" href="/">
+        <Logo boyut={25} sinif="marka__im" />
+        <span>Gnomon <i>Studio</i></span>
+      </a>
+      <nav aria-label="Ana gezinme">
+        <a href="/uygulamalar.html">Uygulamalar</a>
+        <a href="/hakkimizda.html">Hakkımızda</a>
+        <a href="/iletisim.html">İletişim</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="icerik">
+    <slot />
+  </main>
+
+  <footer class="alt">
+    <div class="kabuk alt__ic">
+      <div>
+        <p class="alt__marka">
+          <Logo boyut={20} sinif="marka__im" />
+          <span>{site.ad}</span>
+        </p>
+        <p class="alt__slogan">{site.slogan}</p>
+      </div>
+      <div>
+        <p class="etiket">İletişim</p>
+        <p><a href={`mailto:${site.eposta}`}>{site.eposta}</a></p>
+      </div>
+      <div>
+        <p class="etiket">Kademe</p>
+        <p class="alt__liste">
+          <a href="/kademe/destek.html">Destek</a>
+          <a href="/kademe/gizlilik.html">Gizlilik</a>
+          <a href="/kademe/kullanim-kosullari.html">Koşullar</a>
+        </p>
+      </div>
+    </div>
+    <div class="kabuk alt__telif">
+      <p>© {yil} {site.ad}</p>
+    </div>
+  </footer>
+</body>
+</html>
+
+<style>
+  .atla {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--vurgu);
+    color: var(--ham-golge);
+    padding: 12px 20px;
+    z-index: 10;
+  }
+  .atla:focus { left: 0; }
+
+  .ust__ic {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    min-height: 72px;
+    flex-wrap: wrap;
+  }
+
+  .marka {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--yazi-baslik);
+    font-weight: 680;
+    font-size: var(--t-m);
+    letter-spacing: -0.015em;
+    color: var(--metin);
+    text-decoration: none;
+    min-height: 44px;
+  }
+  /* İşaret marka renginde, kelime nötr: branding.md › "brand color is
+   * saved for primary actions and status" — vurgu tek yerde duruyor. */
+  .marka :global(.marka__im) { color: var(--vurgu); flex: none; }
+  .marka i { font-style: normal; font-weight: 450; color: var(--metin-2); }
+
+  .ust nav {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  /* Dokunma hedefi 44px: accessibility.md › Offering sufficiently sized controls */
+  .ust nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 14px;
+    font-size: var(--t-s);
+    font-weight: 550;
+    color: var(--metin-2);
+    text-decoration: none;
+    border-radius: 999px;
+  }
+  .ust nav a:hover { color: var(--metin); background: var(--yuzey); }
+
+  .alt {
+    margin-top: 96px;
+    border-top: 1px solid var(--ayrac);
+    padding-top: 48px;
+  }
+
+  .alt__ic {
+    display: grid;
+    gap: 32px;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  }
+
+  .alt__marka {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 650;
+    margin-bottom: 6px;
+  }
+  .alt__slogan { color: var(--metin-2); font-size: var(--t-s); max-width: 26ch; }
+
+  .alt p { margin-bottom: 0.4em; }
+  .alt a { color: var(--metin-2); text-decoration: none; }
+  .alt a:hover { color: var(--metin); text-decoration: underline; }
+
+  .alt__liste { display: flex; flex-direction: column; gap: 6px; }
+
+  .alt__telif {
+    margin-top: 40px;
+    padding-block: 20px 32px;
+    border-top: 1px solid var(--ayrac);
+    color: var(--metin-3);
+    font-size: var(--t-xs);
+  }
+</style>

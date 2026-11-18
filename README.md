@@ -1,36 +1,67 @@
-# Uygulamalar
+# Gnomon Studio
 
-Yayımlanan mobil uygulamaların **destek ve yasal sayfaları**. Tek site,
-uygulama başına bir klasör.
+Stüdyonun sitesi: uygulamaların tanıtımı, destek ve yasal sayfaları.
+Tek site, uygulama başına bir klasör.
+
+> **Göremediğin şeyi, iş işten geçmeden gösteririz.**
 
 Her uygulama için App Store ve Google Play üç adres istiyor: destek, gizlilik
 politikası, kullanım koşulları. Uygulama başına ayrı alan adı almak yerine
 hepsi burada duruyor; yeni uygulama bir klasör demek.
 
+Astro · sıfır JavaScript çıktısı · `gnomonstudio.com`
+
 ## Yapı
 
 ```
-icerik/            kaynak (Markdown)
-  index.md         yayıncı sayfası
-  kademe/
-    index.md       destek + sık sorulanlar
-    gizlilik.md
-    kullanim-kosullari.md
-sablon.html        ortak HTML iskeleti (pandoc şablonu)
-assets/style.css   tek CSS, JavaScript yok
-site.json          site geneli değişkenler (iletişim adresi, yayıncı adı)
-docs/              ÜRETİLEN site; GitHub Pages buradan yayımlıyor
+src/
+  pages/           sayfalar (dosya adı = adres)
+    index.astro          /
+    uygulamalar.astro    /uygulamalar.html
+    hakkimizda.astro     /hakkimizda.html
+    iletisim.astro       /iletisim.html
+    kademe/
+      index.astro        /kademe.html          tanıtım
+      destek.md          /kademe/destek.html   destek + SSS
+      gizlilik.md        /kademe/gizlilik.html
+      kullanim-kosullari.md
+  layouts/
+    Temel.astro      site kabuğu (gezinme, footer)
+    Belge.astro      yasal ve destek metinleri — SIFIR JS
+  components/        paylaşılan parçalar
+  data/site.js       site değişkenleri + uygulama kaydı
+  styles/global.css  tasarım tokenları
+public/            olduğu gibi kopyalanan dosyalar (font, ikon, ekran görüntüsü)
+docs/              ÜRETİLEN site; Pages buradan yayımlıyor
+TASARIM.md         tasarım ve içerik planı
 ```
+
+Tasarım kararlarının tamamı **`TASARIM.md`** içinde: hikâye, renk paleti
+(ölçülmüş kontrast oranlarıyla), ışık kuralı, imza öğesi ve sayfa planı.
 
 ## Derleme
 
 ```bash
-python3 build.py
+npm install     # ilk kurulumda bir kez
+npm run build   # src/ → docs/
+npm run dev     # yerel sunucu, canlı yenileme
 ```
 
-`pandoc` gerekiyor (`brew install pandoc`). Çıktı `docs/` altına yazılıyor ve
-depoya commit ediliyor: Pages ayrı bir derleme işi çalıştırmadan doğrudan
-yayımlasın diye.
+Çıktı `docs/` altına yazılıyor ve depoya commit ediliyor: hem GitHub Pages
+hem Cloudflare Pages bu klasörü ayrı bir derleme işi kurmadan doğrudan
+yayımlayabiliyor.
+
+> **Eski pandoc kurulumu (`build.py`, `sablon.html`, `icerik/`, `assets/`)
+> artık kullanılmıyor.** İçerik `src/pages/` altına taşındı. `build.py`
+> çalıştırılırsa `docs/` klasörünü silip eski dört sayfayı geri yazar, yani
+> yeni siteyi ezer. Rahat olduğunda bu dört yol silinebilir; git'te duruyorlar.
+
+## Adresler neden `.html` uzantılı
+
+Kademe'nin `app_config.dart` varsayılanları gizlilik ve kullanım koşulları
+adreslerini **uygulamanın içinde** taşıyor ve `.html` uzantılılar. Uzantısız
+"temiz adres"e geçmek o bağlantıları kırardı. Bu yüzden `build.format` ayarı
+`'file'`.
 
 ## Neden düz HTML
 

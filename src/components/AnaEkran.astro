@@ -1,0 +1,202 @@
+---
+/* İmza öğesi: iPhone ana ekranı, üzerinde Kademe widget'ı.
+ *
+ * Neden widget: tek ikonlu bir ana ekran "portföy" demez, "burada bir şey
+ * yok" der. Gerçek bir telefonun ilk ekranı da zaten böyledir — bir widget,
+ * bir ikon. Dürüst ve Impala'nın 18 jenerik yardımcı program ikonundan daha
+ * çarpıcı. Uygulama çıktıkça ızgara dolar, widget kalır. (TASARIM.md §4)
+ *
+ * Duvar kağıdı işığın kuralını taşıyor: ışık sol üstten geliyor, ortada sert
+ * bir gölge kenarı var, sağ alt gölgede. Telefon da aynı yöne gölge
+ * düşürüyor — yani telefonun kendisi gnomon oluyor.
+ */
+import KademeWidget from './KademeWidget.astro';
+import AppIkon from './AppIkon.astro';
+import { uygulamalar, sayfaIcin } from '../data/site.js';
+
+interface Props { en?: string; }
+const { en = 'min(320px, 78vw)' } = Astro.props;
+const kademe = uygulamalar.find((u) => u.slug === 'kademe');
+---
+
+<div class="kap" style={`--en:${en}`}>
+  <div class="telefon">
+    <div class="ekran">
+      <div class="ada" aria-hidden="true"></div>
+
+      <div class="durum" aria-hidden="true">
+        <span class="durum__saat">9:41</span>
+        <span class="durum__sag">
+          <svg viewBox="0 0 18 12" class="sim"><g fill="currentColor">
+            <rect x="0" y="8" width="3" height="4" rx="1"/>
+            <rect x="5" y="5.5" width="3" height="6.5" rx="1"/>
+            <rect x="10" y="3" width="3" height="9" rx="1"/>
+            <rect x="15" y="0" width="3" height="12" rx="1"/>
+          </g></svg>
+          <svg viewBox="0 0 16 12" class="sim"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+            <path d="M1.2 4.2a10 10 0 0 1 13.6 0"/>
+            <path d="M3.8 7a6.3 6.3 0 0 1 8.4 0"/>
+          </g><circle cx="8" cy="10" r="1.2" fill="currentColor"/></svg>
+          <svg viewBox="0 0 26 12" class="sim">
+            <rect x="0.6" y="0.6" width="21" height="10.8" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.5" stroke-width="1.2"/>
+            <rect x="2.2" y="2.2" width="15" height="7.6" rx="1.8" fill="currentColor"/>
+            <path d="M23.4 4.2v3.6a2.4 2.4 0 0 0 0-3.6z" fill="currentColor" fill-opacity="0.5"/>
+          </svg>
+        </span>
+      </div>
+
+      <div class="icerik">
+        <KademeWidget />
+        <div class="izgara">
+          {uygulamalar.map((u) => (
+            <AppIkon ad={u.ad} ikon={u.ikon} href={sayfaIcin(u.slug)} />
+          ))}
+        </div>
+      </div>
+
+      <div class="dip" aria-hidden="true">
+        <div class="noktalar"><i class="aktif"></i><i></i></div>
+        <div class="ara">
+          <svg viewBox="0 0 14 14"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <circle cx="6" cy="6" r="4.4"/><path d="M9.4 9.4 12.6 12.6"/>
+          </g></svg>
+          <span>Ara</span>
+        </div>
+        <div class="cubuk"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .kap {
+    container-type: inline-size;
+    width: var(--en);
+    margin-inline: auto;
+  }
+
+  .telefon {
+    /* Her şey em: kap genişliği değişince telefonun tamamı birlikte ölçekleniyor */
+    font-size: 4.6cqw;
+    aspect-ratio: 9 / 19.5;
+    padding: 0.55em;
+    border-radius: 3.1em;
+    background: linear-gradient(142deg, #4A4639 0%, #211F18 38%, #14130F 100%);
+    box-shadow:
+      /* Işık sol üstten: orada ince bir aydınlık kenar */
+      inset 1px 1px 0 rgb(245 241 232 / 0.22),
+      /* Gölge sağ alta düşüyor — telefon gnomon */
+      1.4em 2.2em 3.4em -1.2em rgb(0 0 0 / 0.72);
+    animation: golge-uzar 1400ms cubic-bezier(0.3, 0.7, 0.3, 1) both;
+  }
+
+  @keyframes golge-uzar {
+    from {
+      box-shadow:
+        inset 1px 1px 0 rgb(245 241 232 / 0.22),
+        0.2em 0.4em 1.2em -0.6em rgb(0 0 0 / 0.5);
+    }
+  }
+
+  .ekran {
+    position: relative;
+    height: 100%;
+    border-radius: 2.6em;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    /* Duvar kağıdı: güneş vuran taş. Üç katman — gölge kenarı, sol üstten
+     * gelen ışık, taban. İkinci bir degrade yönü yok; hepsi 142deg. */
+    background:
+      /* Gölge kenarı: ışığın kesildiği yer. Sert, çünkü gnomonun gölgesi
+       * de serttir — alt yarı "boş" değil "gölgede" okunmalı. */
+      linear-gradient(142deg,
+        rgb(0 0 0 / 0) 0 41%,
+        rgb(0 0 0 / 0.26) 41.4%,
+        rgb(0 0 0 / 0.40) 58%,
+        rgb(0 0 0 / 0.66) 100%),
+      /* Sol üstten gelen ışık */
+      radial-gradient(122% 96% at 2% -10%,
+        #A08354 0%, #6B5938 18%, #3E3521 38%, rgb(62 53 33 / 0) 64%),
+      linear-gradient(160deg, #302B1D 0%, #15140F 78%);
+  }
+
+  .ada {
+    position: absolute;
+    top: 0.5em;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5.2em;
+    height: 1.55em;
+    border-radius: 999px;
+    background: #000;
+    z-index: 2;
+  }
+
+  .durum {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75em 1.5em 0;
+    color: #fff;
+    font-size: 0.78em;
+    font-weight: 620;
+  }
+  .durum__saat { letter-spacing: -0.01em; }
+  .durum__sag { display: flex; align-items: center; gap: 0.38em; }
+  .sim { height: 0.78em; width: auto; color: #fff; }
+
+  .icerik {
+    flex: 1;
+    padding: 2.1em 1.15em 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+  }
+
+  .izgara {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.1em 0.6em;
+    justify-items: center;
+  }
+
+  .dip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9em;
+    padding-bottom: 0.6em;
+  }
+
+  .noktalar { display: flex; gap: 0.45em; }
+  .noktalar i {
+    width: 0.42em; height: 0.42em;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.32);
+  }
+  .noktalar i.aktif { background: rgb(255 255 255 / 0.9); }
+
+  .ara {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    padding: 0.42em 0.95em;
+    border-radius: 999px;
+    background: rgb(0 0 0 / 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fff;
+    font-size: 0.72em;
+    font-weight: 560;
+  }
+  .ara svg { width: 0.92em; height: 0.92em; }
+
+  .cubuk {
+    width: 8.5em;
+    height: 0.32em;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.55);
+    margin-top: 0.2em;
+  }
+</style>
