@@ -1,0 +1,50 @@
+---
+/* Ekran görüntüsünü telefon çerçevesine oturtur.
+ *
+ * Çerçeve AnaEkran.astro'dakiyle aynı dili konuşuyor: ışık sol üstten
+ * geliyor (ince aydınlık kenar), gölge sağ alta düşüyor. Ekran görüntüsü
+ * simülatörden 1320×2868 alınıp web için 660 piksele indirildi.
+ */
+interface Props { src: string; alt: string; en?: string; }
+const { src, alt, en = 'min(300px, 70vw)' } = Astro.props;
+---
+
+<div class="kap" style={`--en:${en}`}>
+  <div class="telefon">
+    <img src={src} alt={alt} width="660" height="1434" loading="lazy" decoding="async" />
+    <div class="ada" aria-hidden="true"></div>
+  </div>
+</div>
+
+<style>
+  .kap { container-type: inline-size; width: var(--en); margin-inline: auto; }
+
+  .telefon {
+    position: relative;
+    font-size: 4.6cqw;
+    padding: 0.5em;
+    border-radius: 2.9em;
+    background: linear-gradient(142deg, #4A4639 0%, #211F18 38%, #14130F 100%);
+    box-shadow:
+      inset 1px 1px 0 rgb(245 241 232 / 0.22),
+      1.2em 2em 3em -1.1em rgb(0 0 0 / 0.7);
+  }
+
+  .telefon img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 2.45em;
+  }
+
+  .ada {
+    position: absolute;
+    top: 1.05em;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5em;
+    height: 1.5em;
+    border-radius: 999px;
+    background: #000;
+  }
+</style>

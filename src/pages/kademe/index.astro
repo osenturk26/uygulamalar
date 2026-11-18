@@ -3,6 +3,7 @@ import Temel from '../../layouts/Temel.astro';
 import OzellikBlogu from '../../components/OzellikBlogu.astro';
 import UcurumEgrisi from '../../components/UcurumEgrisi.astro';
 import KotaKarti from '../../components/KotaKarti.astro';
+import TelefonCerceve from '../../components/TelefonCerceve.astro';
 import { uygulamaBul, epostaIcin } from '../../data/site.js';
 
 const app = uygulamaBul('kademe');
@@ -110,6 +111,31 @@ const app = uygulamaBul('kademe');
   </section>
 
   <section class="bant bant--golge">
+    <div class="kabuk bolum">
+      <p class="etiket belir">Uygulamanın içi</p>
+      <h2 class="bolum__baslik belir">Gerçek ekranlar</h2>
+      <p class="genis belir">
+        Aşağıdakiler çizim değil: uygulamanın kendisinden, simülatörden
+        alındı. Rakamlar da gerçek — soldaki ekranın limiti 131,37 Sm³,
+        çünkü o fatura dönemi 29 gün sürüyor ve limit güne oranlanıyor.
+        Ayın tamamı için limit 136,01 Sm³.
+      </p>
+      <div class="ekranlar">
+        <div class="belir">
+          <TelefonCerceve src="/uygulamalar/kademe/ekran-ozet.jpg"
+            alt="Kademe özet ekranı: kota halkası 93,96 Sm³, limit 131,37 Sm³, aşım riski" />
+          <p class="ekranlar__alt">Kota halkası ve dönem sonu tahmini</p>
+        </div>
+        <div class="belir">
+          <TelefonCerceve src="/uygulamalar/kademe/ekran-ucurum.jpg"
+            alt="Kademe uçurum eğrisi: faturanın limitte 1.163 TL sıçraması" />
+          <p class="ekranlar__alt">Uçurum eğrisi ve fatura tahmini</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bant bant--isik">
    <div class="kabuk bolum">
     <p class="etiket belir">Merkezi sistem</p>
     <h2 class="belir">Apartmanda da çalışır</h2>
@@ -245,6 +271,22 @@ const app = uygulamaBul('kademe');
 
   /* — Bölümler — */
   .bolum { padding-block: clamp(48px, 7vw, 88px); }
+
+  .ekranlar {
+    margin-top: clamp(32px, 5vw, 48px);
+    display: grid;
+    gap: clamp(32px, 5vw, 56px);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 46rem) {
+    .ekranlar { grid-template-columns: 1fr 1fr; }
+  }
+  .ekranlar__alt {
+    margin-top: 18px;
+    text-align: center;
+    font-size: var(--t-s);
+    color: var(--metin-2);
+  }
   .bolum h2 { margin: 10px 0 14px; }
   .genis { color: var(--metin-2); max-width: 56ch; }
 
