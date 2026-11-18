@@ -32,7 +32,7 @@ src/
   data/site.js       site değişkenleri + uygulama kaydı
   styles/global.css  tasarım tokenları
 public/            olduğu gibi kopyalanan dosyalar (font, ikon, ekran görüntüsü)
-docs/              ÜRETİLEN site; Pages buradan yayımlıyor
+dist/              ÜRETİLEN site; depoya girmiyor
 TASARIM.md         tasarım ve içerik planı
 ```
 
@@ -47,9 +47,9 @@ npm run build   # src/ → docs/
 npm run dev     # yerel sunucu, canlı yenileme
 ```
 
-Çıktı `docs/` altına yazılıyor ve depoya commit ediliyor: hem GitHub Pages
-hem Cloudflare Pages bu klasörü ayrı bir derleme işi kurmadan doğrudan
-yayımlayabiliyor.
+Çıktı `dist/` altına yazılıyor ve **depoya girmiyor**. GitHub yalnız kaynak
+kodu tutuyor; barındırma Cloudflare'de ve `npm run dagit` yerelde derleyip
+gönderiyor.
 
 > **Eski pandoc kurulumu (`build.py`, `sablon.html`, `icerik/`, `assets/`)
 > artık kullanılmıyor.** İçerik `src/pages/` altına taşındı. `build.py`
@@ -79,10 +79,12 @@ Kimlik bilgileri `.cloudflare.local.json` içinde ve **depoya girmiyor**.
 Token'ın ihtiyacı olan yetki: **Hesap → Workers Scripts → Edit**.
 Alan adını bağlamak için ayrıca **Bölge → DNS → Edit** gerekiyor.
 
-> `docs/` klasörü hâlâ commit ediliyor. Dağıtım buradan okuyor ve
-> GitHub Pages de yedek olarak aynı klasörü yayımlayabiliyor.
-> CNAME dosyası kaldırıldı: o GitHub Pages'e aitti, Cloudflare'de
-> özel alan adı Worker kaydıyla bağlanıyor.
+> **GitHub Pages bırakıldı.** Depo artık yalnız kaynak kodu tutuyor.
+> Üretilmiş HTML commit edilmiyor, CNAME dosyası yok, adresler alan adının
+> kökünü varsayıyor (mutlak yol). Bu üçü de GitHub Pages'in gereksinimiydi:
+> Pages derleme çalıştırmadığı için çıktının commit'lenmesini, özel alan adı
+> için CNAME dosyasını, ve `/uygulamalar/` alt yolunda çalışmak için göreli
+> yolları istiyordu. Hiçbiri artık geçerli değil.
 
 ## Adresler neden `.html` uzantılı
 

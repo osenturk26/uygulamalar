@@ -6,12 +6,13 @@
   // katmanda sınırsız istek. Cloudflare yeni projeler için zaten bu yolu
   // öneriyor.
   //
-  // CNAME dosyası kaldırıldı: o GitHub Pages'e ait. Burada özel alan adı
-  // Worker'ın kendi "custom domain" kaydıyla bağlanıyor.
+  // GitHub Pages tamamen bırakıldı: GitHub artık yalnız kaynak kodu
+  // tutuyor, barındırma Cloudflare'de. Bu yüzden ne CNAME dosyası var,
+  // ne de depoda üretilmiş HTML.
   "name": "gnomonstudio",
   "compatibility_date": "2026-11-18",
   "assets": {
-    "directory": "./docs",
+    "directory": "./dist",
     // Adresler .html uzantılı (uygulamanın içine gömülü), bu yüzden
     // sondaki eğik çizgiyle oynanmıyor.
     "html_handling": "auto-trailing-slash",
