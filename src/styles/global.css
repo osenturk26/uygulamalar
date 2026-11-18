@@ -75,8 +75,8 @@
   --t-s: 0.9375rem;    /* 15px */
   --t-m: 1.0625rem;    /* 17px — gövde */
   --t-l: 1.25rem;      /* 20px */
-  --t-xl: clamp(1.5rem, 1.1rem + 1.6vw, 2rem);
-  --t-2xl: clamp(2rem, 1.4rem + 2.8vw, 3rem);
+  --t-xl: clamp(1.75rem, 1.2rem + 2.4vw, 2.6rem);
+  --t-2xl: clamp(2.1rem, 1.4rem + 3.4vw, 3.5rem);
   --t-3xl: clamp(2.5rem, 1.2rem + 5.4vw, 5.5rem);
 
   /* — Ölçü — */
@@ -88,16 +88,32 @@
   --yuvarlak-buyuk: 24px;
 
   /* — Işık kuralı — */
+  /* Tek yön: 142°. Gölgeler, degradeler ve kenar vurguları bunu izler.
+   * Kural yazıyla kalmasın diye YÜZEYLERİN KENDİSİ taşıyor: her kart sol
+   * üstte aydınlık, sağ altta gölgede. */
+  --isik-yonu: 142deg;
   --dusey-gol: 18px 24px 48px -16px rgb(0 0 0 / 0.55);
   --dusey-gol-kucuk: 6px 10px 20px -8px rgb(0 0 0 / 0.45);
-  --kenar-isik: inset 1px 1px 0 rgb(245 241 232 / 0.06);
-  --isik-yonu: 142deg; /* sol üstten sağ alta; her degrade bunu kullanır */
+  --kenar-isik: inset 1px 1px 0 rgb(245 241 232 / 0.07),
+                inset -1px -1px 0 rgb(0 0 0 / 0.28);
 }
 
 /* — Görünümler — */
 .koyu {
   --zemin: var(--ham-golge);
   --yuzey: var(--ham-tas);
+  /* Aydınlık bant: bölümler sırayla ışığa ve gölgeye giriyor, sayfaya
+   * ritim veriyor. Kaynak her zaman sol üst. */
+  --bant-isik: radial-gradient(
+      120% 150% at 6% 0%,
+      rgb(233 162 59 / 0.10) 0%,
+      rgb(233 162 59 / 0.028) 34%,
+      transparent 66%);
+  --yuzey-degrade: linear-gradient(
+      var(--isik-yonu),
+      rgb(245 241 232 / 0.045) 0%,
+      rgb(245 241 232 / 0.012) 42%,
+      rgb(0 0 0 / 0.10) 100%);
   --metin: var(--ham-isik);
   --metin-2: var(--ham-isik-2);
   --metin-3: var(--ham-isik-3);
@@ -110,6 +126,8 @@
 .belge {
   --zemin: var(--ham-kagit);
   --yuzey: var(--ham-kagit-yuzey);
+  --bant-isik: none;
+  --yuzey-degrade: none;
   --metin: var(--ham-murekkep);
   --metin-2: var(--ham-murekkep-2);
   --metin-3: var(--ham-murekkep-3);
@@ -131,7 +149,10 @@
     --ayrac: var(--ham-ayrac-koyu);
     color-scheme: dark;
   }
-  .belge { --dusey-gol: none; } /* koyuda gölge iş görmez; ayrımı yüzey tonu taşır */
+  .belge {
+    --dusey-gol: none; /* koyuda gölge iş görmez; ayrımı yüzey tonu taşır */
+    --kenar-isik: none;
+  }
 }
 
 /* — Taban — */
@@ -226,12 +247,40 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .dugme:hover { transform: translateY(-1px); }
 
-/* Hareketi azalt: her şey son karesinde çizilir (motion.md). */
+/* Kaydırırken beliren bölümler. `animation-timeline: view()` — JavaScript
+ * yok, tarayıcı kaydırma konumunu kendisi sürüyor. Desteklemeyen tarayıcıda
+ * @supports bloğu hiç uygulanmıyor ve içerik olduğu gibi duruyor. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .belir {
+      /* UZUN YAZIM, kısayol DEĞİL. `animation: ... view()` kısayolunu
+       * tarayıcı ayrıştıramıyor ve kural tamamen düşüyor. Küçültücü
+       * bunları kısayola birleştirirse aynı hata geri gelir; çıktı
+       * kontrol edilmeli. */
+      animation-name: belir-gel;
+      animation-duration: 1ms;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: entry 4% cover 26%;
+    }
+  }
+}
+
+@keyframes belir-gel {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Hareketi azalt: her şey son karesinde çizilir (motion.md).
+ * Kaydırma zaman çizelgesi süreye bakmadığı için ayrıca kapatılıyor. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+    animation-timeline: auto !important;
   }
+  .belir { animation: none !important; opacity: 1 !important; transform: none !important; }
 }

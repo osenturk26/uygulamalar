@@ -1,7 +1,26 @@
 ---
 import Temel from '../layouts/Temel.astro';
 import AnaEkran from '../components/AnaEkran.astro';
+import UcurumEgrisi from '../components/UcurumEgrisi.astro';
 import { site, uygulamalar, sayfaIcin } from '../data/site.js';
+
+const kurallar = [
+  {
+    baslik: 'Bilmediğimizi söyleriz',
+    govde: 'Ay başında okuman yoksa Kademe bunu söyler ve sonucu işaretler. Yanlış bir güven vermektense eksik olduğunu bilmen daha iyi.',
+    kanit: 'Tahmini',
+  },
+  {
+    baslik: 'Veri sende kalır',
+    govde: 'Sayaç okumaların varsayılan olarak telefonundan çıkmaz. Hesaplar cihazında yapılır, internet gerekmez. Yedeklemeyi açmak senin kararın.',
+    kanit: 'Cihazda',
+  },
+  {
+    baslik: 'Tek soru, iyi cevap',
+    govde: 'Her uygulama tek bir soruya cevap veriyor. Soruyu çoğaltmak yerine cevabı iyileştirmeyi tercih ediyoruz.',
+    kanit: 'Bir soru',
+  },
+];
 ---
 
 <Temel
@@ -9,7 +28,7 @@ import { site, uygulamalar, sayfaIcin } from '../data/site.js';
   aciklama="Günlük hayatı kolaylaştıran mobil uygulamalar üretiyoruz. Göremediğin şeyi, iş işten geçmeden gösteririz."
   cipli={false}
 >
-  <section class="giris">
+  <section class="giris bant bant--isik">
     <div class="kabuk giris__ic">
       <div class="giris__yazi">
         <h1>{site.slogan}</h1>
@@ -22,79 +41,68 @@ import { site, uygulamalar, sayfaIcin } from '../data/site.js';
           <a class="dugme dugme--ikincil" href="/hakkimizda.html">Neden Gnomon</a>
         </p>
       </div>
-      <div class="giris__telefon">
-        <AnaEkran />
+      <div class="giris__telefon"><AnaEkran /></div>
+    </div>
+  </section>
+
+  <section class="bant bant--golge">
+    <div class="kabuk bolum">
+      <p class="etiket belir">Nasıl çalışıyoruz</p>
+      <h2 class="bolum__baslik belir">Üç kural, üçü de Kademe'de görünür</h2>
+      <div class="kurallar">
+        {kurallar.map((k) => (
+          <article class="kural belir">
+            <h3>{k.baslik}</h3>
+            <div class="kural__sag">
+              <p>{k.govde}</p>
+              <span class="kural__kanit">{k.kanit}</span>
+            </div>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="kabuk bolum">
-    <p class="etiket">Nasıl çalışıyoruz</p>
-    <h2 class="bolum__baslik">Üç kural, üçü de Kademe'de görünür</h2>
-    <ul class="ilkeler">
-      <li>
-        <h3>Bilmediğimizi söyleriz</h3>
-        <p>
-          Ay başında okuman yoksa Kademe bunu söyler ve sonucu{' '}
-          <strong>“tahmini”</strong> diye işaretler. Yanlış bir güven
-          vermektense eksik olduğunu bilmen daha iyi.
-        </p>
-      </li>
-      <li>
-        <h3>Veri sende kalır</h3>
-        <p>
-          Sayaç okumaların varsayılan olarak telefonundan çıkmaz. Hesaplar
-          cihazında yapılır, internet gerekmez. Yedeklemeyi açmak{' '}
-          <strong>senin kararın</strong>.
-        </p>
-      </li>
-      <li>
-        <h3>Tek soru, iyi cevap</h3>
-        <p>
-          Her uygulama tek bir soruya cevap veriyor. Soruyu çoğaltmak yerine
-          cevabı iyileştirmeyi tercih ediyoruz.
-        </p>
-      </li>
-    </ul>
-  </section>
-
-  <section class="kabuk bolum">
-    <p class="etiket">Uygulamalarımız</p>
-    {uygulamalar.map((u) => (
-      <article class="serit">
-        <img class="serit__ikon" src={u.ikon} alt="" width="72" height="72" />
-        <div class="serit__govde">
-          <h2>
-            {u.ad}
-            {u.durum === 'yakinda' && <span class="rozet">Yakında</span>}
-          </h2>
-          <p class="serit__ozet">{u.ozet}</p>
-          <p class="serit__kanit">
-            İstanbul'da Kasım limiti <strong>136,01 Sm³</strong>. Bir nefes
-            aşarsan fatura 2.307 TL yerine 3.511 TL.{' '}
-            <strong class="fark">Aradaki fark 1.204 TL</strong> ve bu fark
-            aşan kısımdan değil, ayın tamamının pahalanmasından geliyor.
+  <section class="bant bant--isik">
+    <div class="kabuk bolum">
+      <p class="etiket belir">Uygulamalarımız</p>
+      <h2 class="bolum__baslik belir">Bir nefes fazlanın bedeli</h2>
+      <div class="ucurum">
+        <div class="ucurum__gorsel belir"><UcurumEgrisi /></div>
+        <div class="ucurum__yazi belir">
+          <p class="ucurum__sayi"><span>1.204</span> ₺</p>
+          <p class="ucurum__aciklama">
+            İstanbul'da Kasım limiti <strong>136,01 Sm³</strong>. Limitte
+            kalırsan fatura 2.307 TL; bir nefes aşarsan aynı gaz için
+            3.511 TL. Pahalanan şey aşan kısım değil, ayın tamamı.
           </p>
-          <p><a class="dugme dugme--ikincil" href={sayfaIcin(u.slug)}>{u.ad} sayfası</a></p>
+          {uygulamalar.map((u) => (
+            <a class="ucurum__app" href={sayfaIcin(u.slug)}>
+              <img src={u.ikon} alt="" width="52" height="52" />
+              <span>
+                <b class="ucurum__ad">
+                  <strong>{u.ad}</strong>
+                  {u.durum === 'yakinda' && <i class="rozet">Yakında</i>}
+                </b>
+                <em>{u.altBaslik} — bu farkı aşmadan önce gösterir</em>
+              </span>
+            </a>
+          ))}
         </div>
-      </article>
-    ))}
+      </div>
+    </div>
   </section>
 </Temel>
 
 <style>
-  .giris {
-    position: relative;
-    padding-block: clamp(40px, 6vw, 88px) clamp(48px, 7vw, 96px);
-    /* Işık sol üstten; sayfanın geri kalanı gölgeye doğru gidiyor */
-    background: radial-gradient(
-      110% 85% at 10% -5%,
-      rgb(233 162 59 / 0.13) 0%,
-      rgb(233 162 59 / 0.035) 38%,
-      transparent 68%
-    );
-    border-bottom: 1px solid var(--ayrac);
-  }
+  /* Bantlar: bölümler sırayla ışığa ve gölgeye giriyor. Sayfanın ritmi
+   * bu — her bandın kaynağı kendi sol üst köşesi. */
+  .bant { position: relative; }
+  .bant--isik { background: var(--bant-isik); }
+  .bant--golge { background: none; }
+  .bant + .bant { border-top: 1px solid var(--ayrac); }
+
+  .giris { padding-block: clamp(40px, 6vw, 88px) clamp(48px, 7vw, 96px); }
 
   .giris__ic {
     display: grid;
@@ -102,95 +110,124 @@ import { site, uygulamalar, sayfaIcin } from '../data/site.js';
     align-items: center;
     grid-template-columns: 1fr;
   }
-
   @media (min-width: 52rem) {
     .giris__ic { grid-template-columns: 1.05fr 0.95fr; }
   }
 
-  .giris h1 {
-    font-size: var(--t-3xl);
-    font-weight: 700;
-    max-width: 15ch;
-  }
-
+  .giris h1 { font-size: var(--t-3xl); font-weight: 700; max-width: 15ch; }
   .giris__alt {
-    margin-top: 24px;
-    max-width: 44ch;
-    font-size: var(--t-l);
-    color: var(--metin-2);
+    margin-top: 24px; max-width: 44ch;
+    font-size: var(--t-l); color: var(--metin-2);
   }
-
-  .giris__dugmeler {
-    margin-top: 32px;
-    display: flex;
-    gap: 12px;          /* 12px: dokunma hedefleri arası asgari boşluk */
-    flex-wrap: wrap;
-  }
-
+  .giris__dugmeler { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
   .giris__telefon { display: flex; justify-content: center; }
 
-  .bolum { padding-block: clamp(48px, 7vw, 88px); }
+  .bolum { padding-block: clamp(52px, 8vw, 96px); }
   .bolum__baslik { margin-top: 10px; max-width: 20ch; }
 
-  .ilkeler {
-    list-style: none;
-    padding: 0;
-    margin: 36px 0 0;
+  /* Kutu yok. Satırlar, aralarında saç teli çizgi; ışık her satırın
+   * üzerinden soldan geçiyor. Üç özdeş kart "şablon" gibi duruyordu. */
+  .kurallar { margin-top: clamp(32px, 5vw, 56px); }
+
+  .kural {
     display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 10px 48px;
+    grid-template-columns: 1fr;
+    padding-block: clamp(26px, 3.4vw, 40px);
+    border-top: 1px solid var(--ayrac);
+    background: linear-gradient(
+      100deg,
+      rgb(245 241 232 / 0.035) 0%,
+      transparent 46%
+    );
+  }
+  .kural:last-child { border-bottom: 1px solid var(--ayrac); }
+
+  @media (min-width: 46rem) {
+    .kural { grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr); }
   }
 
-  .ilkeler li {
-    padding: 24px;
-    border: 1px solid var(--ayrac);
-    border-radius: var(--yuvarlak-buyuk);
-    background: var(--yuzey);
-    box-shadow: var(--dusey-gol-kucuk), var(--kenar-isik);
+  .kural h3 {
+    font-size: clamp(1.3rem, 0.9rem + 1.5vw, 1.85rem);
+    font-weight: 680;
+    letter-spacing: -0.022em;
+    max-width: 14ch;
   }
 
-  .ilkeler h3 { margin-bottom: 10px; }
-  .ilkeler p { color: var(--metin-2); margin: 0; }
+  .kural p { color: var(--metin-2); max-width: 52ch; margin: 0; }
 
-  .serit {
+  .kural__kanit {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: var(--t-xs);
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--vurgu);
+    border: 1px solid color-mix(in srgb, var(--vurgu) 42%, transparent);
+    border-radius: 999px;
+    padding: 5px 12px;
+  }
+
+  /* Uçurum: ürünün tezini tek görselde ve tek sayıda veriyor. */
+  .ucurum {
+    margin-top: clamp(32px, 5vw, 48px);
+    display: grid;
+    gap: clamp(28px, 4.5vw, 56px);
+    align-items: center;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 52rem) {
+    .ucurum { grid-template-columns: 1.1fr 0.9fr; }
+  }
+
+  .ucurum__sayi {
+    font-family: var(--yazi-baslik);
+    font-size: clamp(3.4rem, 2rem + 6vw, 6rem);
+    font-weight: 700;
+    letter-spacing: -0.045em;
+    line-height: 1;
+    margin: 0;
+    color: var(--metin);
+  }
+  .ucurum__sayi span { color: var(--vurgu); }
+
+  .ucurum__aciklama {
+    margin-top: 18px;
+    color: var(--metin-2);
+    max-width: 44ch;
+  }
+
+  .ucurum__app {
     display: flex;
-    gap: 24px;
-    align-items: flex-start;
-    margin-top: 24px;
-    padding: 28px;
-    border: 1px solid var(--ayrac);
+    align-items: center;
+    gap: 16px;
+    margin-top: 28px;
+    padding: 16px 18px;
     border-radius: var(--yuvarlak-buyuk);
-    background: var(--yuzey);
+    border: 1px solid var(--ayrac);
+    background: var(--yuzey-degrade), var(--yuzey);
     box-shadow: var(--dusey-gol-kucuk), var(--kenar-isik);
-    flex-wrap: wrap;
+    text-decoration: none;
+    color: var(--metin);
   }
-
-  .serit__ikon { border-radius: 23%; flex: none; box-shadow: var(--dusey-gol-kucuk); }
-  .serit__govde { flex: 1; min-width: min(100%, 18rem); }
-
-  .serit h2 { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .ucurum__app:hover { border-color: color-mix(in srgb, var(--vurgu) 45%, var(--ayrac)); }
+  .ucurum__app img { border-radius: 23%; flex: none; box-shadow: var(--dusey-gol-kucuk); }
+  .ucurum__app span { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .ucurum__ad { display: flex; align-items: center; gap: 10px; font-weight: 400; }
+  .ucurum__app strong { font-size: var(--t-l); font-weight: 670; letter-spacing: -0.02em; }
+  .ucurum__app em { font-style: normal; font-size: var(--t-s); color: var(--metin-2); }
 
   .rozet {
+    font-style: normal;
+    flex: none;
     font-size: var(--t-xs);
-    font-weight: 600;
+    font-weight: 650;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--ham-golge);
     background: var(--vurgu);
-    padding: 3px 10px;
+    padding: 2px 9px;
     border-radius: 999px;
   }
-
-  .serit__ozet { margin-top: 10px; color: var(--metin-2); max-width: 54ch; }
-
-  .serit__kanit {
-    margin-top: 16px;
-    padding-left: 16px;
-    border-left: 2px solid var(--vurgu);
-    color: var(--metin-2);
-    max-width: 54ch;
-  }
-  .serit__kanit .fark { color: var(--metin); }
-
-  .serit__govde p:last-child { margin-top: 20px; margin-bottom: 0; }
 </style>
