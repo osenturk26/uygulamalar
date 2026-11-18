@@ -6,8 +6,8 @@ const { ustBaslik, baslik, ters = false } = Astro.props;
 ---
 
 <section class={`blok${ters ? ' blok--ters' : ''}`}>
-  <div class="blok__gorsel"><slot name="gorsel" /></div>
-  <div class="blok__yazi">
+  <div class="blok__gorsel belir"><slot name="gorsel" /></div>
+  <div class="blok__yazi belir">
     <p class="etiket ust">{ustBaslik}</p>
     <h2>{baslik}</h2>
     <slot />
@@ -19,7 +19,7 @@ const { ustBaslik, baslik, ters = false } = Astro.props;
     display: grid;
     gap: clamp(28px, 5vw, 56px);
     align-items: center;
-    padding-block: clamp(36px, 6vw, 72px);
+    padding-block: clamp(32px, 4.5vw, 56px);
     grid-template-columns: 1fr;
   }
 

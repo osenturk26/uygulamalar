@@ -247,6 +247,26 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .dugme:hover { transform: translateY(-1px); }
 
+/* Bantlar: bölümler sırayla ışığa ve gölgeye giriyor, sayfanın ritmi bu.
+ * Her bandın kaynağı kendi sol üst köşesi — ışık kuralı sayfa ölçeğinde. */
+.bant { position: relative; }
+.bant--isik { background: var(--bant-isik); }
+.bant + .bant { border-top: 1px solid var(--ayrac); }
+
+/* Satır ayracı: çizginin kendisi soldan parlak başlayıp sağa sönüyor.
+ * Düz bir yıkama degradesi koyu zeminde leke gibi çıkıyordu. */
+.cizgi-isik {
+  background-image: linear-gradient(
+    90deg,
+    rgb(245 241 232 / 0.30) 0%,
+    rgb(245 241 232 / 0.10) 42%,
+    rgb(245 241 232 / 0.04) 100%
+  );
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: top left;
+}
+
 /* Kaydırırken beliren bölümler. `animation-timeline: view()` — JavaScript
  * yok, tarayıcı kaydırma konumunu kendisi sürüyor. Desteklemeyen tarayıcıda
  * @supports bloğu hiç uygulanmıyor ve içerik olduğu gibi duruyor. */

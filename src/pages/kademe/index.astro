@@ -12,7 +12,7 @@ const app = uygulamaBul('kademe');
   baslik="Kademe"
   aciklama="Doğal gazda kademeli tarife takibi. İlinin aylık limiti, ne kadar kaldığın ve limiti aşmanın faturaya kaç lira ekleyeceği."
 >
-  <section class="giris">
+  <section class="giris bant bant--isik">
     <div class="kabuk giris__ic">
       <img src={app.ikon} alt="" width="112" height="112" class="ikon" />
       <h1>{app.ad}</h1>
@@ -27,7 +27,8 @@ const app = uygulamaBul('kademe');
     </div>
   </section>
 
-  <div class="kabuk">
+  <section class="bant bant--golge">
+    <div class="kabuk">
     <OzellikBlogu ustBaslik="Uçurum" baslik="Fatura, limitte dikey olarak sıçrıyor">
       <UcurumEgrisi slot="gorsel" />
       <p>
@@ -55,6 +56,11 @@ const app = uygulamaBul('kademe');
       </p>
     </OzellikBlogu>
 
+    </div>
+  </section>
+
+  <section class="bant bant--isik">
+    <div class="kabuk">
     <OzellikBlogu ustBaslik="Dürüst hesap" baslik="Bilmediğini bilmen, yanlış güvenden iyidir">
       <div slot="gorsel" class="mok mok--tahmin">
         <p class="mok__ust">Bu ayki tüketim</p>
@@ -100,23 +106,27 @@ const app = uygulamaBul('kademe');
         gerekmiyor, okumaların yine telefonundan çıkmıyor.
       </p>
     </OzellikBlogu>
-  </div>
+    </div>
+  </section>
 
-  <section class="kabuk bolum">
-    <p class="etiket">Merkezi sistem</p>
-    <h2>Apartmanda da çalışır</h2>
-    <p class="genis">
+  <section class="bant bant--golge">
+   <div class="kabuk bolum">
+    <p class="etiket belir">Merkezi sistem</p>
+    <h2 class="belir">Apartmanda da çalışır</h2>
+    <p class="genis belir">
       Binanızda merkezi sistem varsa bina tüketimi bağımsız bölüm sayısına
       bölünerek hane başına değere çevrilir. Sayacın ham m³ gösterdiğini,
       faturanın Sm³ üzerinden kesildiğini de hesaba katar; düzeltme
       katsayısını kendi faturandan girebilirsin.
     </p>
+   </div>
   </section>
 
-  <section class="kabuk bolum">
-    <p class="etiket">Kademe Pro</p>
-    <h2>Ücretsizde ne var, Pro'da ne var</h2>
-    <div class="tablo-kap">
+  <section class="bant bant--isik">
+   <div class="kabuk bolum">
+    <p class="etiket belir">Kademe Pro</p>
+    <h2 class="belir">Ücretsizde ne var, Pro'da ne var</h2>
+    <div class="tablo-kap belir">
       <table class="tablo">
         <thead>
           <tr><th>&nbsp;</th><th>Ücretsiz</th><th>Pro</th></tr>
@@ -133,14 +143,15 @@ const app = uygulamaBul('kademe');
         </tbody>
       </table>
     </div>
-    <p class="not">
+    <p class="not belir">
       Yedekleme bilerek ücretsiz: veri kaybı korkusunu paraya çevirmek doğru
       gelmedi. Pro için hesap açman da gerekmiyor — abonelik mağaza hesabına
       bağlı. Fiyatlar mağazada görünür.
     </p>
+   </div>
   </section>
 
-  <section class="kapanis">
+  <section class="kapanis bant bant--golge">
     <div class="kabuk">
       <h2>Bir nefes fazlanın bedelini, nefesi almadan gör.</h2>
       <p class="kapanis__alt">Yakında App Store ve Google Play'de.</p>
@@ -155,16 +166,7 @@ const app = uygulamaBul('kademe');
 </Temel>
 
 <style>
-  .giris {
-    padding-block: clamp(48px, 8vw, 96px) clamp(32px, 5vw, 56px);
-    background: radial-gradient(
-      110% 80% at 12% -6%,
-      rgb(233 162 59 / 0.15) 0%,
-      rgb(233 162 59 / 0.04) 38%,
-      transparent 70%
-    );
-    border-bottom: 1px solid var(--ayrac);
-  }
+  .giris { padding-block: clamp(48px, 8vw, 96px) clamp(40px, 6vw, 72px); }
   .giris__ic { max-width: var(--en-metin); }
 
   .ikon { border-radius: 23%; box-shadow: var(--dusey-gol); margin-bottom: 26px; }
@@ -242,13 +244,25 @@ const app = uygulamaBul('kademe');
   .bildirim__govde { margin-top: 2px !important; font-size: 13.5px; color: rgb(255 255 255 / 0.8); }
 
   /* — Bölümler — */
-  .bolum { padding-block: clamp(36px, 5vw, 64px); border-top: 1px solid var(--ayrac); }
+  .bolum { padding-block: clamp(48px, 7vw, 88px); }
   .bolum h2 { margin: 10px 0 14px; }
   .genis { color: var(--metin-2); max-width: 56ch; }
 
   .tablo-kap { overflow-x: auto; margin-top: 22px; }
   .tablo { width: 100%; border-collapse: collapse; font-size: var(--t-s); min-width: 30rem; }
-  .tablo th, .tablo td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--ayrac); }
+  .tablo th, .tablo td {
+    text-align: left;
+    padding: 14px 14px;
+    background-image: linear-gradient(
+      90deg,
+      rgb(245 241 232 / 0.26) 0%,
+      rgb(245 241 232 / 0.09) 42%,
+      rgb(245 241 232 / 0.03) 100%
+    );
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom left;
+  }
   .tablo th { color: var(--metin-3); font-weight: 620; }
   .tablo th:not(:first-child), .tablo td:not(:first-child) { text-align: center; width: 9rem; }
   .tablo .var { color: var(--vurgu); font-weight: 620; }
@@ -257,9 +271,8 @@ const app = uygulamaBul('kademe');
   .not { margin-top: 18px; font-size: var(--t-s); color: var(--metin-2); max-width: 56ch; }
 
   .kapanis {
-    padding-block: clamp(56px, 8vw, 104px);
+    padding-block: clamp(64px, 9vw, 112px);
     text-align: center;
-    border-top: 1px solid var(--ayrac);
     background: radial-gradient(80% 100% at 50% 0%, rgb(233 162 59 / 0.1) 0%, transparent 62%);
   }
   .kapanis h2 { font-size: var(--t-2xl); max-width: 20ch; margin-inline: auto; }
