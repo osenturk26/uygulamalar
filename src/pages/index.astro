@@ -131,34 +131,43 @@ const kurallar = [
 
   .kural {
     display: grid;
-    gap: 10px 48px;
+    gap: 10px 40px;
     grid-template-columns: 1fr;
-    padding-block: clamp(26px, 3.4vw, 40px);
-    border-top: 1px solid var(--ayrac);
-    background: linear-gradient(
-      100deg,
-      rgb(245 241 232 / 0.035) 0%,
-      transparent 46%
+    padding-block: clamp(22px, 2.2vw, 30px);
+    border-top: 0;
+    background-image: linear-gradient(
+      90deg,
+      rgb(245 241 232 / 0.30) 0%,
+      rgb(245 241 232 / 0.10) 42%,
+      rgb(245 241 232 / 0.04) 100%
     );
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top left;
   }
-  .kural:last-child { border-bottom: 1px solid var(--ayrac); }
+  .kural:last-child {
+    padding-bottom: 0;
+    box-shadow: inset 0 -1px 0 rgb(245 241 232 / 0.08);
+    padding-bottom: clamp(22px, 2.2vw, 30px);
+  }
 
   @media (min-width: 46rem) {
-    .kural { grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr); }
+    .kural { grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr); }
   }
 
   .kural h3 {
     font-size: clamp(1.3rem, 0.9rem + 1.5vw, 1.85rem);
     font-weight: 680;
     letter-spacing: -0.022em;
-    max-width: 14ch;
+    max-width: 13ch;
+    align-self: start;
   }
 
   .kural p { color: var(--metin-2); max-width: 52ch; margin: 0; }
 
   .kural__kanit {
     display: inline-block;
-    margin-top: 14px;
+    margin-top: 12px;
     font-size: var(--t-xs);
     font-weight: 650;
     letter-spacing: 0.06em;

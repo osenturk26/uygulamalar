@@ -1,81 +1,151 @@
 ---
 import Temel from '../layouts/Temel.astro';
-import { site } from '../data/site.js';
+import GnomonSemasi from '../components/GnomonSemasi.astro';
+import { site, sayfaIcin } from '../data/site.js';
+
+/* Üç kural ana sayfada duruyor ve orada daha iyi anlatılıyor; burada
+ * tekrarlanmıyordu ama tekrarlanıyordu — kaldırıldı. Bu sayfanın
+ * söyleyeceği başka şeyler var: adın nereden geldiği ve neyi
+ * YAPMADIĞIMIZ. İkincisi daha ayırt edici, çünkü gerekçeleri gerçek. */
+const yapmadiklarimiz = [
+  {
+    baslik: 'Reklam koymuyoruz',
+    govde: 'Değerlendirildi ve elendi. Reklam geliri oturum sayısıyla ölçekleniyor; Kademe tasarımı gereği ayda iki üç kez açılıyor. Karşılığında takip izni istemek, verinin cihazda kaldığı temiz hikâyeyi bozmaya değmedi.',
+  },
+  {
+    baslik: 'Doğrulayamadığımız sayıyı yazmıyoruz',
+    govde: 'Sitede indirme sayısı, kullanıcı yorumu ve ödül rozeti yok — çünkü henüz yok. Boş bırakılan bir sayı, hiç konmamış sayıdan kötüdür.',
+  },
+  {
+    baslik: 'Aciliyet uydurmuyoruz',
+    govde: 'Uygulama limiti aştığında uyarı tersine döner: ayın tamamı zaten üst tarifeden faturalanacağı için kısıntının faydası kalmaz. Bunu da söylüyoruz. Üşümene gerek yok.',
+  },
+];
 ---
 
 <Temel
   baslik="Hakkımızda"
   aciklama="Gnomon, güneş saatinin gölgeyi düşüren çubuğu. Hesap yapmaz; zaten orada olanı okunur kılar."
 >
-  <article class="kabuk govde">
-    <p class="etiket">Hakkımızda</p>
-    <h1>Adımız yaptığımız işi anlatıyor</h1>
+  <section class="bant bant--isik">
+    <div class="kabuk giris">
+      <p class="etiket">Hakkımızda</p>
+      <h1>Adımız yaptığımız işi anlatıyor</h1>
+      <p class="soz">{site.slogan}</p>
+    </div>
+  </section>
 
-    <p class="onsoz">
-      <strong>Gnomon</strong>, güneş saatinin gölgeyi düşüren çubuğudur.
-      Bilinen en eski bilimsel alet. Hesap yapmaz, bir şey üretmez —
-      zaten orada olanı <strong>okunur kılar</strong>. Saati yaratmaz,
-      saatin görülmesini sağlar.
-    </p>
+  <section class="bant bant--golge">
+    <div class="kabuk ad">
+      <div class="ad__gorsel belir"><GnomonSemasi /></div>
+      <div class="ad__yazi belir">
+        <h2>Bilinen en eski bilimsel alet</h2>
+        <p>
+          <strong>Gnomon</strong>, güneş saatinin gölgeyi düşüren çubuğudur.
+          Hesap yapmaz, bir şey üretmez — zaten orada olanı
+          <strong>okunur kılar</strong>. Saati yaratmaz, saatin görülmesini
+          sağlar.
+        </p>
+        <p>
+          Yaptığımız iş birebir bu. Doğal gazdaki kademe limiti zaten var.
+          Senin tüketimin zaten var. Arada duran uçurum da zaten orada.
+          Kademe bunların hiçbirini üretmiyor; sen düşmeden önce görünür
+          kılıyor.
+        </p>
+        <p>
+          Bu yüzden söylediğimiz şey “hayatı kolaylaştıran uygulamalar
+          yapıyoruz” değil. Onu herkes söylüyor ve hiçbir şey vaat etmiyor.
+          Bizimki bir söz.
+        </p>
+      </div>
+    </div>
+  </section>
 
-    <p>
-      Yaptığımız iş birebir bu. Doğal gazdaki kademe limiti zaten var.
-      Senin tüketimin zaten var. Arada duran uçurum da zaten orada.
-      Kademe bunların hiçbirini üretmiyor; sen düşmeden önce görünür
-      kılıyor.
-    </p>
-
-    <p>
-      Bu yüzden söylediğimiz şey “hayatı kolaylaştıran uygulamalar
-      yapıyoruz” değil. Onu herkes söylüyor ve hiçbir şey vaat etmiyor.
-      Bizimki bir söz:
-    </p>
-
-    <p class="soz">{site.slogan}</p>
-
-    <h2>Nasıl çalışıyoruz</h2>
-
-    <h3>Bilmediğimizi söyleriz</h3>
-    <p>
-      Kademe, ay başında okuman yoksa bunu sana söyler ve sonucu{' '}
-      <strong>“tahmini”</strong> diye işaretler. Yanlış bir güven vermektense
-      eksik olduğunu bilmen daha iyi.
-    </p>
-
-    <h3>Veri sende kalır</h3>
-    <p>
-      Sayaç okumaların varsayılan olarak telefonundan çıkmaz. Hesaplar
-      cihazında yapılır, internet gerekmez. Yedeklemeyi açmak senin kararın
-      ve açtığında bunu sana açıkça söyleriz.
-    </p>
-
-    <h3>Tek soru, iyi cevap</h3>
-    <p>
-      Her uygulama tek bir soruya cevap veriyor. Soruyu çoğaltmak yerine
-      cevabı iyileştirmeyi tercih ediyoruz.
-    </p>
-  </article>
+  <section class="bant bant--isik">
+    <div class="kabuk bolum">
+      <p class="etiket belir">Ne yapmıyoruz</p>
+      <h2 class="bolum__baslik belir">Bazı kararlar, yapılanlardan daha çok şey anlatır</h2>
+      <div class="liste">
+        {yapmadiklarimiz.map((y) => (
+          <article class="oge belir">
+            <h3>{y.baslik}</h3>
+            <p>{y.govde}</p>
+          </article>
+        ))}
+      </div>
+      <p class="cikis belir">
+        Nasıl çalıştığımızı üç kuralda topladık —
+        <a href="/">ana sayfada</a> duruyor. Uygulamanın kendisini görmek
+        istersen <a href={sayfaIcin('kademe')}>Kademe sayfası</a>.
+      </p>
+    </div>
+  </section>
 </Temel>
 
 <style>
-  .govde { max-width: var(--en-metin); padding-block: clamp(40px, 7vw, 72px); }
-  .govde h1 { font-size: var(--t-2xl); margin: 10px 0 28px; }
-  .govde h2 {
-    margin: 48px 0 16px;
-    padding-top: 20px;
-    border-top: 1px solid var(--ayrac);
-  }
-  .govde h3 { margin: 28px 0 8px; }
-  .onsoz { font-size: var(--t-l); color: var(--metin); }
-  .govde p { color: var(--metin-2); }
-  .onsoz, .soz { color: var(--metin); }
+  .bant { position: relative; }
+  .bant--isik { background: var(--bant-isik); }
+  .bant + .bant { border-top: 1px solid var(--ayrac); }
+
+  .giris { padding-block: clamp(44px, 7vw, 88px); max-width: var(--en-metin); }
+  .giris h1 { margin-top: 10px; font-size: var(--t-2xl); max-width: 16ch; }
 
   .soz {
+    margin-top: 28px;
     font-size: var(--t-xl);
-    font-weight: 650;
-    letter-spacing: -0.02em;
+    font-weight: 660;
+    font-family: var(--yazi-baslik);
+    letter-spacing: -0.025em;
+    line-height: 1.2;
     border-left: 3px solid var(--vurgu);
-    padding: 4px 0 4px 20px;
-    margin: 28px 0;
+    padding: 6px 0 6px 20px;
+    max-width: 22ch;
   }
+
+  .ad {
+    display: grid;
+    gap: clamp(28px, 4.5vw, 56px);
+    align-items: center;
+    grid-template-columns: 1fr;
+    padding-block: clamp(44px, 7vw, 88px);
+  }
+  @media (min-width: 54rem) {
+    .ad { grid-template-columns: 1.05fr 0.95fr; }
+  }
+  .ad h2 { max-width: 14ch; }
+  .ad__yazi p { margin-top: 16px; color: var(--metin-2); max-width: 46ch; }
+
+  .bolum { padding-block: clamp(48px, 7vw, 88px); }
+  .bolum__baslik { margin-top: 10px; max-width: 22ch; }
+
+  .liste {
+    margin-top: clamp(28px, 4vw, 44px);
+    display: grid;
+    gap: 0;
+  }
+
+  .oge {
+    display: grid;
+    gap: 8px 40px;
+    grid-template-columns: 1fr;
+    padding-block: clamp(20px, 2.2vw, 28px);
+    border-top: 0;
+    background-image: linear-gradient(
+      90deg,
+      rgb(245 241 232 / 0.30) 0%,
+      rgb(245 241 232 / 0.10) 42%,
+      rgb(245 241 232 / 0.04) 100%
+    );
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top left;
+  }
+  .oge:last-of-type { box-shadow: inset 0 -1px 0 rgb(245 241 232 / 0.08); }
+  @media (min-width: 46rem) {
+    .oge { grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr); }
+  }
+  .oge h3 { font-size: var(--t-l); font-weight: 670; max-width: 14ch; align-self: start; }
+  .oge p { margin: 0; color: var(--metin-2); max-width: 54ch; }
+
+  .cikis { margin-top: 32px; color: var(--metin-2); max-width: 48ch; }
 </style>
