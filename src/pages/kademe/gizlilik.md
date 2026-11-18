@@ -4,7 +4,7 @@ baslik: "Kademe Gizlilik Politikası"
 aciklama: "Kademe uygulamasının hangi verileri işlediği. Kısa cevap: sayaç okumalarınız varsayılan olarak cihazınızdan çıkmaz."
 ustBaslik: "Kademe"
 ---
-**Son güncelleme:** 18 Kasım 2026
+**Son güncelleme:** 19 Kasım 2026
 
 Bu metin Kademe uygulamasının hangi verileri işlediğini anlatır. Kısa cevap:
 **sayaç okumalarınız varsayılan olarak cihazınızdan çıkmaz.**
@@ -110,6 +110,9 @@ ve "Satın alımları geri yükle" ile her cihazda geri getirilebilir.
   paylaşmıyoruz.
 - **Konumunuza erişmiyoruz.** İl bilgisini siz seçersiniz; GPS kullanılmaz.
 - **Rehberinize erişmiyoruz.**
+- **Çerez kullanmıyoruz.** Bu politikanın yayımlandığı site tamamen
+  statiktir: çerez yok, JavaScript yok, analitik yok. Bu yüzden ayrı bir
+  çerez politikası da yok.
 - **Fotoğraf arşivinizi taramıyoruz.** Kamera ve fotoğraflar yalnızca
   fotoğraftan okuma özelliğini siz kullandığınızda devreye girer ve orada da
   yalnızca o an seçtiğiniz tek kare alınır (4. bölüm).
@@ -136,24 +139,70 @@ gönderilmez.
 - Silinen kayıtlar, cihazlar arası tutarlılık için en fazla 180 gün boyunca
   yalnızca "silindi" işareti olarak tutulur; içerikleri saklanmaz.
 
-## 9. Haklarınız (KVKK)
+## 9. Hukuki sebep ve toplama yöntemi
 
-6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında; işlenen
-verileriniz hakkında bilgi talep etme, düzeltilmesini veya silinmesini
-isteme ve işlemeye itiraz etme haklarına sahipsiniz. Talepleriniz için
-aşağıdaki adrese yazabilirsiniz.
+Kişisel verileriniz **yalnızca uygulamayı kullanmanız sırasında, sizin
+girdiğiniz veya seçtiğiniz bilgilerden** toplanır. Arka planda çalışan bir
+toplama yoktur; veri satın alınmaz, başka kaynaklardan derlenmez.
 
-## 10. Çocuklar
+| Ne | Nasıl toplanıyor | Neden işleniyor |
+|---|---|---|
+| Sayaç bilgisi ve okumalar | Siz girersiniz | Kota hesabı — sözleşmenin ifası |
+| Yedeklenen kopya | Siz açarsanız | Verinizi geri yükleyebilmeniz — açık rızanız |
+| Fatura PDF'i / fotoğraf | Siz seçip yüklersiniz | Sayıları okuyup size döndürmek — açık rızanız |
+| Abonelik durumu | Mağazadan gelir | Pro erişimi — sözleşmenin ifası |
+
+Yedekleme ve fotoğraftan okuma **varsayılan olarak kapalıdır**; siz
+açmadıkça bu veriler hiç işlenmez. İstediğiniz zaman kapatabilirsiniz.
+
+## 10. Yurt dışına aktarım
+
+Varsayılan kullanımda hiçbir veriniz yurt dışına çıkmaz, çünkü cihazdan
+hiç çıkmaz. Yalnızca aşağıdaki iki özelliği **siz açarsanız** aktarım olur:
+
+| Özellik | Nereye | Ülke |
+|---|---|---|
+| Yedekleme ve senkron | Supabase | Almanya (Frankfurt) |
+| Fatura PDF'i / fotoğraftan okuma | Sunucumuz → OpenAI | ABD |
+
+Fotoğraf ve PDF hiçbir yere kaydedilmez: istekle birlikte gider, yanıtla
+birlikte silinir (4. bölüm). Her iki özellik de ilk kullanımdan önce size
+ne olduğunu anlatır ve onayınızı ister; onay vermezseniz özellik çalışmaz
+ve uygulamanın geri kalanı etkilenmez.
+
+## 11. Haklarınız (KVKK madde 11)
+
+6698 sayılı Kişisel Verilerin Korunması Kanunu'nun 11. maddesi uyarınca
+şu haklara sahipsiniz:
+
+- Kişisel verinizin işlenip işlenmediğini **öğrenme**
+- İşlenmişse buna ilişkin **bilgi talep etme**
+- İşlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme
+- Yurt içinde veya yurt dışında **aktarıldığı üçüncü kişileri bilme**
+- Eksik veya yanlış işlenmişse **düzeltilmesini** isteme
+- Kanundaki şartlar çerçevesinde **silinmesini veya yok edilmesini** isteme
+- Düzeltme ve silme işlemlerinin aktarıldığı üçüncü kişilere **bildirilmesini**
+  isteme
+- İşlenen verilerin münhasıran otomatik sistemlerle analiz edilmesi
+  suretiyle aleyhinize bir sonuç çıkmasına **itiraz etme**
+- Kanuna aykırı işleme sebebiyle zarara uğramanız hâlinde **zararın
+  giderilmesini** talep etme
+
+Taleplerinizi aşağıdaki iletişim adresine yazabilirsiniz; en geç **30 gün**
+içinde sonuçlandırılır. Hesabınızı ve sunucudaki verilerinizi beklemeden,
+doğrudan uygulamanın içinden de silebilirsiniz (8. bölüm).
+
+## 12. Çocuklar
 
 Uygulama 13 yaş altı kullanıcılara yönelik değildir ve bilerek bu yaş
 grubundan veri toplamaz.
 
-## 11. Değişiklikler
+## 13. Değişiklikler
 
 Bu metinde önemli bir değişiklik olursa uygulama içinde bildirilir ve
 yukarıdaki tarih güncellenir.
 
-## 12. İletişim
+## 14. İletişim
 
 Gizlilikle ilgili her konu için: **kademe@gnomonstudio.com**
 
