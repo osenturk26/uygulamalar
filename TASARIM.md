@@ -85,29 +85,41 @@ görüntüde birleşiyor.
 
 ### 3.2 Renk
 
-Rol bazlı, altı değer. Hepsi ölçüldü (WCAG, `kontrast.py`):
+**Tek palet, iki görünüm, sistem tercihine uyar.** Varsayılan açık; koyu
+tercih eden kullanıcı koyusunu görür.
+
+> Önce vitrin her zaman koyuydu, belgeler sistem tercihine uyuyordu.
+> 20 Kas 2026'da birleştirildi. İki sebep: referansımız (Impala) açık
+> temalı ve asıl ürün olan uygulama ekranları koyu — açık zeminde
+> belirgin biçimde öne çıkıyorlar. İkincisi `dark-mode.md`: uygulamaya
+> özel görünüm dayatmamak.
+
+Açık görünüm (varsayılan), ölçülmüş:
 
 | Token | Değer | Rol | Kontrast |
 |---|---|---|---|
-| `--golge` | `#14130F` | Ana zemin (sıcak kömür, saf siyah değil) | — |
-| `--tas` | `#211F18` | Yükseltilmiş yüzey, kart | — |
-| `--isik` | `#F5F1E8` | Ana metin (kireçtaşı beyazı) | **16,49:1** / golge · **14,62:1** / tas |
-| `--isik-2` | `#B5AF9F` | İkincil metin | **8,49:1** |
-| `--isik-3` | `#7E7868` | Yalnız ikon ve ayraç, metin değil | **4,23:1** (eşik 3:1) |
-| `--amber` | `#E9A23B` | Vurgu: güneş ışığı | **8,58:1** / golge · **7,61:1** / tas |
+| `--zemin` | `#FAF8F3` | Ana zemin (kâğıt) | — |
+| `--yuzey` | `#F2EFE7` | Kart, yükseltilmiş yüzey | — |
+| `--metin` | `#1A1813` | Ana metin | **16,71:1** / zemin · **15,44:1** / yüzey |
+| `--metin-2` | `#5C564A` | İkincil metin | **6,86:1** · **6,33:1** |
+| `--metin-3` | `#8A8375` | Yalnız ikon ve ayraç | **3,54:1** (eşik 3:1) |
+| `--vurgu` | `#8A5A00` | Vurgu | **5,58:1** · **5,16:1** |
+| `--ayrac` | `#DDD7CA` | Çizgi | — |
 
-Açık zemin varyantı (yasal sayfalar, açık tema):
-`--kagit #FAF8F3` · metin `#1A1813` (**16,71:1**) · ikincil `#5C564A`
-(**6,86:1**) · amber metin `#8A5A00` (**5,58:1**).
+Koyu görünüm (sistem tercihi): zemin `#14130F`, yüzey `#211F18`, metin
+`#F5F1E8` (**16,49:1**), ikincil `#B5AF9F` (**8,49:1**), üçüncül
+`#7E7868` (**4,23:1**), vurgu `#E9A23B` (**8,58:1**).
 
-Neden saf siyah değil: üç referansın üçü de siyah. Sıcak kömür hem ayırt
-ediyor hem de güneş saati taşına ait. Neden amber: gölgeyi düşüren şey ışık.
+Birincil butonun zemini her iki görünümde de amber `#E9A23B`, üstündeki
+koyu metinle **8,58:1**.
+
+**Koyu kalanlar:** telefon maketi, ana ekran duvar kâğıdı, widget ve kota
+kartı. Onlar bir cihazı tasvir ediyor, sayfanın yüzeyini değil — gerçek
+ekran görüntüleri de koyu temadan alındı.
 
 `color.md › Best practices`: *"Avoid using the same color to mean different
-things."* — Amber yalnız vurgu. Kademe'nin kendi durum renkleri (yeşil/amber/
-kırmızı) **sadece** uygulama ekran görüntülerinin ve widget'ın içinde geçerli;
-site kabuğunda kullanılmıyor. Aksi halde sitedeki amber "marka", widget'taki
-amber "uyarı" olurdu ve aynı renk iki şey derdi.
+things."* — Amber yalnız vurgu. Kademe'nin kendi durum renkleri
+(yeşil/amber/kırmızı) **sadece** uygulama tasvirlerinin içinde geçerli.
 
 ### 3.3 Tipografi
 

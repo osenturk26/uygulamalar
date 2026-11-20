@@ -13,6 +13,7 @@ os.chdir(pathlib.Path(__file__).resolve().parent.parent)
 
 CX = CY = 22.0; R = 21.0; ACI = 38.0; W = 4.2; KUTU = 44.0
 AMBER = (233, 162, 59); GOLGE = (20, 19, 15); ISIK = (245, 241, 232)
+KAGIT = (250, 248, 243); MUREKKEP = (26, 24, 19); AMBER_KOYU = (138, 90, 0)
 FONT = pathlib.Path.home() / "Desktop/Kademe/kademe_app/.claude/worktrees/kanka-website-setup-f64fb9/kademe_app/assets/fonts/Inter-Variable.ttf"
 S = 8  # supersampling: Pillow kenar yumuşatma yapmıyor
 
@@ -73,20 +74,23 @@ def main():
     isaret(180, zemin=GOLGE, pay=0.14).save("public/apple-touch-icon.png")
 
     # OG görseli 1200×630
-    # Sol üstten gelen ışık: bulanıklaştırılmış elips maskesiyle yumuşak geçiş.
-    # İç içe elips çizmek bantlanma yapıyordu — gerçek bir degrade gerekiyor.
-    taban = Image.new("RGB", (1200, 630), GOLGE)
-    sicak = Image.new("RGB", (1200, 630), (58, 50, 31))
+    # Site açık temaya geçince OG de açık oldu; paylaşım önizlemesi
+    # sayfanın kendisiyle aynı şeyi göstermeli.
+    #
+    # Sol üstten gelen ışık: bulanıklaştırılmış elips maskesiyle yumuşak
+    # geçiş. İç içe elips çizmek bantlanma yapıyordu.
+    taban = Image.new("RGB", (1200, 630), KAGIT)
+    sicak = Image.new("RGB", (1200, 630), (253, 240, 216))
     isik_m = Image.new("L", (1200, 630), 0)
     ImageDraw.Draw(isik_m).ellipse([-440, -540, 880, 540], fill=255)
     isik_m = isik_m.filter(ImageFilter.GaussianBlur(200))
     og = Image.composite(sicak, taban, isik_m)
     d2 = ImageDraw.Draw(og)
     og.paste(isaret(104), (84, 74), isaret(104))
-    d2.text((84, 232), "Göremediğin şeyi,", font=font(72, 720), fill=ISIK)
-    d2.text((84, 318), "iş işten geçmeden", font=font(72, 720), fill=ISIK)
-    d2.text((84, 404), "gösteririz.", font=font(72, 720), fill=ISIK)
-    d2.text((84, 522), "Gnomon Studio", font=font(30, 600), fill=AMBER)
+    d2.text((84, 232), "Göremediğin şeyi,", font=font(72, 720), fill=MUREKKEP)
+    d2.text((84, 318), "iş işten geçmeden", font=font(72, 720), fill=MUREKKEP)
+    d2.text((84, 404), "gösteririz.", font=font(72, 720), fill=MUREKKEP)
+    d2.text((84, 522), "Gnomon Studio", font=font(30, 600), fill=AMBER_KOYU)
     og.save("public/og.png", optimize=True)
 
     for y in ("public/favicon.svg", "public/logo.svg", "public/favicon-32.png",

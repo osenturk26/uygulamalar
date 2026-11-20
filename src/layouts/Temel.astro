@@ -6,18 +6,17 @@ import Logo from '../components/Logo.astro';
 interface Props {
   baslik: string;
   aciklama?: string;
-  tema?: 'koyu' | 'belge';
   /** Sayfa başlığına site adı eklensin mi (ana sayfada gereksiz) */
   cipli?: boolean;
 }
 
-const { baslik, aciklama, tema = 'koyu', cipli = true } = Astro.props;
+const { baslik, aciklama, cipli = true } = Astro.props;
 const tamBaslik = cipli ? `${baslik} · ${site.ad}` : baslik;
 const yil = new Date().getFullYear();
 ---
 
 <!doctype html>
-<html lang="tr" class={tema}>
+<html lang="tr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />

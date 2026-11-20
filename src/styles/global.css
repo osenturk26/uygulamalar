@@ -98,36 +98,24 @@
                 inset -1px -1px 0 rgb(0 0 0 / 0.28);
 }
 
-/* — Görünümler — */
-.koyu {
-  --zemin: var(--ham-golge);
-  --yuzey: var(--ham-tas);
-  /* Aydınlık bant: bölümler sırayla ışığa ve gölgeye giriyor, sayfaya
-   * ritim veriyor. Kaynak her zaman sol üst. */
-  --bant-isik: radial-gradient(
-      120% 150% at 6% 0%,
-      rgb(233 162 59 / 0.10) 0%,
-      rgb(233 162 59 / 0.028) 34%,
-      transparent 66%);
-  --yuzey-degrade: linear-gradient(
-      var(--isik-yonu),
-      rgb(245 241 232 / 0.045) 0%,
-      rgb(245 241 232 / 0.012) 42%,
-      rgb(0 0 0 / 0.10) 100%);
-  --metin: var(--ham-isik);
-  --metin-2: var(--ham-isik-2);
-  --metin-3: var(--ham-isik-3);
-  --vurgu: var(--ham-amber);
-  --vurgu-metin: var(--ham-amber);
-  --ayrac: var(--ham-ayrac-koyu);
-  color-scheme: dark;
-}
-
-.belge {
+/* — Görünüm —
+ *
+ * TEK SİSTEM, SİSTEM TERCİHİNE UYAR. Varsayılan açık; koyu tercih eden
+ * kullanıcı koyusunu görür.
+ *
+ * Önceden iki ayrı görünüm vardı: vitrin her zaman koyu (sanat yönetimi),
+ * belgeler sistem tercihine uyan açık. İki sebeple birleştirildi.
+ * Birincisi: sitenin kendi referansı (Impala) açık temalı ve asıl ürün olan
+ * uygulama ekranları koyu — açık zeminde belirgin biçimde öne çıkıyorlar.
+ * İkincisi dark-mode.md: uygulamaya özel görünüm dayatmamak, tercihi
+ * kullanıcıya bırakmak.
+ *
+ * Telefon maketi, widget ve kota kartı koyu kalıyor; onlar bir cihazı
+ * tasvir ediyor, sayfanın yüzeyi değil.
+ */
+:root {
   --zemin: var(--ham-kagit);
   --yuzey: var(--ham-kagit-yuzey);
-  --bant-isik: none;
-  --yuzey-degrade: none;
   --metin: var(--ham-murekkep);
   --metin-2: var(--ham-murekkep-2);
   --metin-3: var(--ham-murekkep-3);
@@ -135,10 +123,34 @@
   --vurgu-metin: var(--ham-amber-koyu);
   --ayrac: var(--ham-ayrac-acik);
   color-scheme: light;
+
+  /* Aydınlık bant: bölümler sırayla ışığa ve gölgeye giriyor. */
+  --bant-isik: radial-gradient(
+      120% 150% at 6% 0%,
+      rgb(233 162 59 / 0.17) 0%,
+      rgb(233 162 59 / 0.05) 36%,
+      transparent 68%);
+  --yuzey-degrade: linear-gradient(
+      var(--isik-yonu),
+      rgb(255 255 255 / 0.9) 0%,
+      rgb(255 255 255 / 0.35) 45%,
+      rgb(0 0 0 / 0.035) 100%);
+  --kenar-isik: inset 1px 1px 0 rgb(255 255 255 / 0.9),
+                inset -1px -1px 0 rgb(0 0 0 / 0.05);
+  --dusey-gol: 14px 22px 42px -18px rgb(40 32 16 / 0.30);
+  --dusey-gol-kucuk: 5px 9px 18px -8px rgb(40 32 16 / 0.22);
+
+  /* Satır ayracı. Işık soldan geldiği için çizgi solda koyu başlar ve
+   * sağa doğru söner; koyu temada bunun tersi olur. */
+  --cizgi-degrade: linear-gradient(
+      90deg,
+      rgb(26 24 19 / 0.26) 0%,
+      rgb(26 24 19 / 0.10) 42%,
+      rgb(26 24 19 / 0.04) 100%);
 }
 
 @media (prefers-color-scheme: dark) {
-  .belge {
+  :root {
     --zemin: var(--ham-golge);
     --yuzey: var(--ham-tas);
     --metin: var(--ham-isik);
@@ -148,10 +160,27 @@
     --vurgu-metin: var(--ham-amber);
     --ayrac: var(--ham-ayrac-koyu);
     color-scheme: dark;
-  }
-  .belge {
-    --dusey-gol: none; /* koyuda gölge iş görmez; ayrımı yüzey tonu taşır */
-    --kenar-isik: none;
+
+    --bant-isik: radial-gradient(
+        120% 150% at 6% 0%,
+        rgb(233 162 59 / 0.10) 0%,
+        rgb(233 162 59 / 0.028) 34%,
+        transparent 66%);
+    --yuzey-degrade: linear-gradient(
+        var(--isik-yonu),
+        rgb(245 241 232 / 0.045) 0%,
+        rgb(245 241 232 / 0.012) 42%,
+        rgb(0 0 0 / 0.10) 100%);
+    /* Koyuda gölge iş görmez (siyah üstüne siyah); ayrımı yüzey tonu taşır. */
+    --dusey-gol: none;
+    --dusey-gol-kucuk: none;
+    --kenar-isik: inset 1px 1px 0 rgb(245 241 232 / 0.07),
+                  inset -1px -1px 0 rgb(0 0 0 / 0.28);
+    --cizgi-degrade: linear-gradient(
+        90deg,
+        rgb(245 241 232 / 0.30) 0%,
+        rgb(245 241 232 / 0.10) 42%,
+        rgb(245 241 232 / 0.04) 100%);
   }
 }
 
@@ -256,12 +285,7 @@ img { max-width: 100%; height: auto; display: block; }
 /* Satır ayracı: çizginin kendisi soldan parlak başlayıp sağa sönüyor.
  * Düz bir yıkama degradesi koyu zeminde leke gibi çıkıyordu. */
 .cizgi-isik {
-  background-image: linear-gradient(
-    90deg,
-    rgb(245 241 232 / 0.30) 0%,
-    rgb(245 241 232 / 0.10) 42%,
-    rgb(245 241 232 / 0.04) 100%
-  );
+  background-image: var(--cizgi-degrade);
   background-size: 100% 1px;
   background-repeat: no-repeat;
   background-position: top left;

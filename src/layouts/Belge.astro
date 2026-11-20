@@ -1,9 +1,9 @@
 ---
 /* Yasal metinler ve destek sayfaları.
  *
- * Vitrinden ayrı bir düzen, bilerek: burada uzun metin okunuyor, sanat
- * yönetimi değil okunabilirlik önde. Bu yüzden `.belge` teması sistem
- * tercihine uyuyor (açık/koyu) ve satır uzunluğu 44rem'de tutuluyor.
+ * Vitrinden ayrı tek şey satır uzunluğu: burada uzun metin okunuyor ve
+ * 44rem'in üstünde göz satır başını kaybediyor. Renk sistemi artık ortak;
+ * site de belgeler de sistem tercihine uyuyor.
  *
  * SIFIR JAVASCRIPT. App Store incelemesi gizlilik adresini bazen otomatik
  * bir denetleyiciyle açıyor; sayfanın görünmesi JS'e bağlıysa boş ekran
@@ -18,7 +18,7 @@ const aciklama = Astro.props.aciklama ?? frontmatter?.aciklama;
 const ustBaslik = Astro.props.ustBaslik ?? frontmatter?.ustBaslik;
 ---
 
-<Temel baslik={baslik} aciklama={aciklama} tema="belge">
+<Temel baslik={baslik} aciklama={aciklama}>
   <article class="belge-govde kabuk">
     {ustBaslik && <p class="etiket">{ustBaslik}</p>}
     <h1>{baslik}</h1>
